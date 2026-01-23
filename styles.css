@@ -1237,7 +1237,7 @@ h3 {
     padding: 12px 6px 8px 6px;
   }
   .logo {
-    font-size: 1.3rem;
+    display: none;
   }
   .nav-links {
     gap: 18px;
