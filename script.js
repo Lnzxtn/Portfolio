@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = this.getAttribute('data-project-modal-description');
             const projectLink = this.getAttribute('data-project-link');
 
-            // Collect project images (data-project-image, data-project-image2, ...)
+            // Collect project images (data-project-image, data-project-image2, ... up to data-project-image14)
             projectImages = [];
             if (image) projectImages.push(image);
-            for (let i = 2; i <= 5; i++) {
+            for (let i = 2; i <= 14; i++) {
                 const extra = this.getAttribute('data-project-image' + i);
                 if (extra) projectImages.push(extra);
             }
@@ -431,3 +431,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 }); 
+
+// Desktop certifications carousel (PC only)
+document.addEventListener('DOMContentLoaded', function() {
+    const awardsGrid = document.querySelector('.awards-grid');
+    const awardsPrev = document.querySelector('.awards-prev');
+    const awardsNext = document.querySelector('.awards-next');
+
+    if (awardsGrid && awardsPrev && awardsNext) {
+        const scrollAmount = () => awardsGrid.clientWidth * 0.8;
+
+        awardsPrev.addEventListener('click', () => {
+            awardsGrid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+        });
+
+        awardsNext.addEventListener('click', () => {
+            awardsGrid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+        });
+    }
+});

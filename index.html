@@ -94,7 +94,9 @@
     <section id="awards" class="section">
         <div class="container">
             <h2>Certifications</h2>
-            <div class="awards-grid">
+            <div class="awards-carousel">
+                <button class="awards-nav awards-prev" aria-label="Previous certification">&#8249;</button>
+                <div class="awards-grid">
                 <div class="award-card" data-title="Certificate of Achievement" data-institution="Computer Communication Development Institute" data-description="Awarded for academic excellence (Dean's Lister). General Weighted Average: 1.51. Date: February 14, 2024." data-image="Certifications/Certificate of Achievement.jpg" data-full-image="Certifications/Certificate of Achievement.jpg">
                     <img src="Certifications/Certificate of Achievement.jpg" alt="Certificate of Achievement" class="award-card-img" />
                     <div class="award-card-content">
@@ -116,6 +118,22 @@
                         <p>Cisco Networking Academy</p>
                     </div>
                 </div>
+                <div class="certification-card" data-title="C++ Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed C++ Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 2, 2026." data-image="Certifications/C++_Essentials_1.png" data-pdf="Certifications/C++_Essentials_1_certificate.pdf">
+                    <img src="Certifications/C++_Essentials_1.png" alt="C++ Essentials 1 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>C++ Essentials 1</h3>
+                        <p>Cisco Networking Academy</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="Python Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed Python Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 5, 2026." data-image="Certifications/Python_Essentials_1.png" data-pdf="Certifications/Python_Essentials_1_certificate.pdf">
+                    <img src="Certifications/Python_Essentials_1.png" alt="Python Essentials 1 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>Python Essentials 1</h3>
+                        <p>Cisco Networking Academy</p>
+                    </div>
+                </div>
+                </div>
+                <button class="awards-nav awards-next" aria-label="Next certification">&#8250;</button>
             </div>
         </div>
     </section>
@@ -142,7 +160,7 @@
                     <p class="modal-description" id="modalDescription"></p>
                     <div class="modal-buttons">
                         <a id="modalFullImageLink" href="" target="_blank" rel="noopener noreferrer" class="modal-full-image-link" style="display: none;">View Certificate</a>
-                        <a id="modalPdfLink" href="Certifications/I2CSUpdate20250524-25-2hphqb.pdf" target="_blank" rel="noopener noreferrer" class="modal-pdf-link" style="display: none;">View PDF Certificate</a>
+                        <a id="modalPdfLink" href="Certifications/Introduction to Cybersecurity.pdf" target="_blank" rel="noopener noreferrer" class="modal-pdf-link" style="display: none;">View PDF Certificate</a>
                     </div>
                 </div>
             </div>
@@ -177,14 +195,29 @@
         <div class="container">
             <h2>Projects</h2>
             <div class="projects-grid">
-                <div class="project-card" data-project-image="Projects/capstone.jpg" data-project-image2="Projects/capstone.png" data-project-title="AI-Powered-Intruder-Detection-System" data-project-modal-description="Project Status: The system is currently 90% complete. Remaining tasks include SMS notification integration and comprehensive testing. I am currently working on this project, with the capstone final defense upcoming.
+                <div class="project-card" 
+                    data-project-image="Projects/Dashboard.png" 
+                    data-project-image2="Projects/login.png" 
+                    data-project-image3="Projects/Forgot Password.png" 
+                    data-project-image4="Projects/Detected intruders.png" 
+                    data-project-image5="Projects/Register.png" 
+                    data-project-image6="Projects/Controls.png"
+                    data-project-image7="Projects/Live camera.png"
+                    data-project-image8="Projects/Edit.png" 
+                    data-project-image9="Projects/Register.png" 
+                    data-project-image10="Projects/Known face.png" 
+                    data-project-image11="Projects/Notifications.png" 
+                    data-project-image12="Projects/Error 403.png" 
+                    data-project-image13="Projects/Error 500.png" 
+                    data-project-image14="Projects/Error 404.png" 
+                data-project-title="AI-Powered-Intruder-Detection-System" data-project-modal-description="Project Status: The system is currently 90% complete. Remaining tasks include SMS notification integration and comprehensive testing. I am currently working on this project, with the capstone final defense upcoming.
 
 The capstone project. I chose to build an AI-Powered Intruder Detection System, a complete security solution that monitors restricted areas in real time using an IP camera for a small business. I chose this project because other common titles like e-commerce are too common, and I wanted to build something unique that would stand out. This wasn't just another class assignment, this was a real system that would protect real spaces, detect real threats, and send real alerts when unauthorized and unknown individuals entered restricted areas.
 
 The system uses an IP camera connected via RTSP streams to capture live video feed, then applies advanced facial recognition powered by AWS Rekognition to identify authorized personnel and detect unknown faces. Unlike different cameras that only detect motion, my system can recognize and identify specific individuals, making it more intelligent and precise. The classification logic works through three distinct scenarios: Registered + Authorized faces are allowed entry with no alarm, notification, or snapshot triggered; Registered + Unauthorized faces trigger immediate alarms, play alarm sounds, and capture snapshots for security review; and Not Registered faces are labeled as Unknown, which also triggers alarms and automatically captures snapshots for investigation. Every detection creates a comprehensive security solution that bridges computer vision, cloud AI, and full-stack web development into a single, deployable platform.
 
 I built this system using a full-stack approach: PHP 8+ for the web interface and backend logic, Python with OpenCV for real-time video processing from IP camera and the AI detection engine, MySQL for data persistence and system state management, JavaScript and Bootstrap 5.2.3 for the responsive frontend, and AWS services (Rekognition and S3) for cloud-based AI and storage.">
-                    <img src="Projects/capstone.jpg" alt="AI-Powered Intruder Detection System" class="project-image" />
+                    <img src="Projects/Dashboard.png" alt="AI-Powered Intruder Detection System" class="project-image" />
                     <h3>AI-Powered-Intruder-Detection-System</h3>
                     <p>My capstone Project: AI-powered facial recognition security system using AWS Rekognition, OpenCV, and PHP. Real-time detection with web-based control panel, instant alerts, and cloud backup.</p>
                 </div>
