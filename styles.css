@@ -162,6 +162,28 @@ body {
   margin-top: 30px;
 }
 
+/* Mobile / small tablet: horizontal swipe carousel for projects (1 card at a time) */
+@media (max-width: 900px) {
+  .projects-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 12px;
+    padding-bottom: 8px;
+  }
+
+  .projects-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-card {
+    min-width: 85vw;
+    max-width: 90vw;
+    scroll-snap-align: center;
+  }
+}
+
 .project-card {
   background: #232323;
   padding: 24px;
@@ -640,8 +662,23 @@ h3 {
   }
 
   .awards-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 12px;
+    padding-bottom: 8px;
+  }
+
+  .awards-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .award-card,
+  .certification-card {
+    min-width: 85vw;
+    max-width: 90vw;
+    scroll-snap-align: center;
   }
 }
 
