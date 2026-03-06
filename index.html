@@ -46,7 +46,7 @@
     <section id="skills" class="section">
         <div class="container">
             <h2>Skills</h2>
-            <p class="skills-description">I have experience with HTML, CSS, JavaScript, PHP, and MySQL. Additionally, I have skills in basic computer troubleshooting and maintenance, as well as networking fundamentals.</p>
+            <p class="skills-description">I have experience with HTML, CSS, JavaScript, PHP, Bootstrap, and MySQL. Additionally, I have skills in basic computer troubleshooting and maintenance, as well as networking fundamentals.</p>
             <div class="skills-container">
                 <div class="skill-card" title="HTML">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="skill-icon" />
@@ -59,6 +59,9 @@
                 </div>
                 <div class="skill-card" title="PHP">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="skill-icon" />
+                </div>
+                <div class="skill-card" title="Bootstrap">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="skill-icon" />
                 </div>
                 <div class="skill-card" title="MySQL">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="skill-icon" />
@@ -156,6 +159,7 @@
                 </div>
                 <button class="awards-nav awards-next" aria-label="Next certification">&gt;</button>
             </div>
+            <div class="carousel-indicators" id="certificationsIndicators"></div>
         </div>
     </section>
 
@@ -216,7 +220,9 @@
     <section id="projects" class="section">
         <div class="container">
             <h2>Projects</h2>
-            <div class="projects-grid">
+            <div class="projects-carousel">
+                <button class="projects-nav projects-prev" aria-label="Previous project">&lt;</button>
+                <div class="projects-grid">
                 <div class="project-card" 
                     data-project-image="Projects/Dashboard.png" 
                     data-project-image2="Projects/login.png" 
@@ -251,8 +257,46 @@ Deployed on Vercel for quick rollout and easy updates." data-project-link="https
                     <img src="Projects/ACi.png" alt="ACI 40th Year Grand Alumni Homecoming 2025 Registration / Tracker" class="project-image" />
                     <h3>ACI 40th Year Grand Alumni Homecoming 2025 Registration / Tracker</h3>
                     <p>Landing page with Google Form registration and a live Google Sheets–powered registration tracker, deployed on Vercel.</p>
+                </div>
+                <div class="project-card" 
+                    data-project-image="Projects/Appointment Booking 1.png" 
+                    data-project-image2="Projects/Appointment Booking 2.png" 
+                    data-project-image3="Projects/Appointment Booking 3.png" 
+                    data-project-image4="Projects/Appointment Booking 4.png" 
+                    data-project-image5="Projects/Appointment Booking 5.png" 
+                    data-project-title="Appointment Booking Web Application" 
+                    data-project-modal-description="A clinic appointment booking web application built as a final project for my Web Development course at Computer Communication Development Institute. This web-based platform allows users to book and schedule patient appointments with a user-friendly and cross-browser compatible interface.
+
+The system provides comprehensive appointment management for clinic staff, enabling smooth appointment scheduling, cancellation, and rescheduling functionality. The application enhances both the patient experience and clinic efficiency through its intuitive design.
+
+Key features include: User Registration and Authentication System for secure access, Interactive Dashboard for appointment management with real-time updates, Full appointment CRUD functionality (creation, editing, and cancellation), Search and Filtering Options for easy appointment lookup, and a User-Friendly Interface built using the Bootstrap framework.
+
+The application is built with PHP for server-side logic and MySQL for robust data management, ensuring reliable performance and data integrity. The front-end utilizes HTML, CSS, and Bootstrap to deliver a modern user interface.">
+                    <img src="Projects/Appointment Booking 3.png" alt="Appointment Booking Web Application" class="project-image" />
+                    <h3>Appointment Booking Web Application</h3>
+                    <p>A clinic appointment booking system with user authentication, interactive dashboard, and full appointment management. Built with PHP, MySQL, HTML, CSS, and Bootstrap.</p>
+                </div>
+                <div class="project-card" 
+                    data-project-image="Projects/Single Page.png" 
+                    data-project-image2="Projects/Single Page1.png" 
+                    data-project-image3="Projects/Single Page2.png"
+                    data-project-title="Single Page Layout" 
+                    data-project-link="https://lnzxtn.github.io/WebDevSFinals---Carillo-2024/"
+                    data-project-modal-description="A single-page layout website that I personally designed and developed for an agency/school as part of my Semi Final exam assignment. I chose to create this specific layout because I wanted to demonstrate my understanding of fundamental web design principles while crafting a clean, professional aesthetic that would be both functional and visually appealing.
+
+When designing this project, I made deliberate choices about the structure and visual hierarchy. I chose a single-page layout because it provides a seamless user experience, allowing visitors to access all essential information without navigation complexity. This design decision reflects modern web trends while maintaining accessibility and usability.
+
+The website features a comprehensive homepage layout that I structured to include: a Header with intuitive Navigation menu for seamless site navigation, a welcoming Hero/Welcome section with carefully selected introductory text and complementary imagery, a Services section that prominently displays the agency's Mission, Vision, and core goals in an organized and engaging manner, and a Footer containing essential company information and contact details.
+
+I chose to design this website for Gold's Gym because I personally enjoy working out and have a passion for fitness. This personal connection to the subject matter made the project more meaningful and motivated me to create something authentic. Building a site for something I'm genuinely interested in allowed me to better understand the target audience and design a layout that would resonate with fellow fitness enthusiasts while showcasing the gym's offerings effectively.">
+                    <img src="Projects/Single Page.png" alt="Single Page Layout" class="project-image" />
+                    <h3>Single Page Layout</h3>
+                    <p>A Gold's Gym single-page website for my Semi Final exam, built using HTML and CSS.</p>
                 </div>  
             </div>
+            <button class="projects-nav projects-next" aria-label="Next project">&gt;</button>
+            </div>
+            <div class="carousel-indicators" id="projectsIndicators"></div>
         </div>
     </section>
 

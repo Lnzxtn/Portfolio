@@ -569,3 +569,95 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Desktop projects carousel (PC only)
+document.addEventListener('DOMContentLoaded', function() {
+    const projectsGrid = document.querySelector('.projects-grid');
+    const projectsPrev = document.querySelector('.projects-prev');
+    const projectsNext = document.querySelector('.projects-next');
+
+    if (projectsGrid && projectsPrev && projectsNext) {
+        const scrollAmount = () => projectsGrid.clientWidth * 0.8;
+
+        projectsPrev.addEventListener('click', () => {
+            projectsGrid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+        });
+
+        projectsNext.addEventListener('click', () => {
+            projectsGrid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+        });
+    }
+});
+
+// Carousel Pagination Indicators for Mobile/Tablet
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup for Certifications section
+    const certificationsGrid = document.querySelector('.awards-grid');
+    const certificationsIndicators = document.getElementById('certificationsIndicators');
+    
+    // Setup for Projects section
+    const projectsGrid = document.querySelector('.projects-grid');
+    const projectsIndicators = document.getElementById('projectsIndicators');
+
+    function setupCarouselIndicators(grid, indicatorsContainer) {
+        if (!grid || !indicatorsContainer) return;
+
+        const items = grid.children;
+        if (items.length === 0) return;
+
+        // Create indicator dots
+        indicatorsContainer.innerHTML = '';
+        for (let i = 0; i < items.length; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'indicator-dot';
+            if (i === 0) dot.classList.add('active');
+            
+            // Click handler to scroll to item
+            dot.addEventListener('click', () => {
+                items[i].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            });
+            
+            indicatorsContainer.appendChild(dot);
+        }
+
+        // Update active indicator on scroll
+        function updateActiveIndicator() {
+            const scrollLeft = grid.scrollLeft;
+            const itemWidth = items[0].offsetWidth;
+            const gap = parseInt(getComputedStyle(grid).gap) || 0;
+            const totalItemWidth = itemWidth + gap;
+            
+            // Calculate which item is currently centered/visible
+            const activeIndex = Math.round(scrollLeft / totalItemWidth);
+            const clampedIndex = Math.max(0, Math.min(activeIndex, items.length - 1));
+            
+            // Update indicator dots
+            const dots = indicatorsContainer.querySelectorAll('.indicator-dot');
+            dots.forEach((dot, index) => {
+                if (index === clampedIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Listen to scroll events
+        let scrollTimeout;
+        grid.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateActiveIndicator, 50);
+        });
+
+        // Initial update
+        updateActiveIndicator();
+    }
+
+    // Initialize both carousels
+    setupCarouselIndicators(certificationsGrid, certificationsIndicators);
+    setupCarouselIndicators(projectsGrid, projectsIndicators);
+});
