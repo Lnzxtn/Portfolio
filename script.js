@@ -253,11 +253,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Reveal content with animation as it enters the viewport - Desktop only
+// Reveal content with animation as it enters the viewport
 window.addEventListener('DOMContentLoaded', () => {
-    // Skip animations on mobile and tablet
-    const isDesktop = window.innerWidth > 1024;
-    if (!isDesktop) return;
 
     const revealTargets = Array.from(document.querySelectorAll(
         '.hero-info, .hero-image, #skills h2, .skills-description, .skills-container, #education h2, .education-item, #awards h2, .award-card, .certification-card, #projects h2, .project-card, .contact-subtitle, .contact-title, .contact-card, .site-footer'
@@ -265,7 +262,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (!revealTargets.length) return;
 
-    let alternatingDirection = 0;
+    let educationDirection = 0;
+    let projectDirection = 0;
+    
     revealTargets.forEach((element, index) => {
         element.classList.add('reveal-on-scroll');
         element.style.animationDelay = `${(index % 5) * 90}ms`;
@@ -274,10 +273,14 @@ window.addEventListener('DOMContentLoaded', () => {
             element.classList.add('from-left');
         } else if (element.matches('.hero-image')) {
             element.classList.add('from-right');
-        } else if (element.matches('.education-item, .award-card, .certification-card, .project-card')) {
-            element.classList.add(alternatingDirection % 2 === 0 ? 'from-left' : 'from-right');
-            alternatingDirection++;
+        } else if (element.matches('.education-item')) {
+            element.classList.add(educationDirection % 2 === 0 ? 'from-left' : 'from-right');
+            educationDirection++;
+        } else if (element.matches('.project-card')) {
+            element.classList.add(projectDirection % 2 === 0 ? 'from-left' : 'from-right');
+            projectDirection++;
         }
+        // .award-card and .certification-card get default revealInUp animation
     });
 
     // Fallback for older browsers without IntersectionObserver

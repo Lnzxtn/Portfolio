@@ -108,32 +108,23 @@ body {
   width: 100%;
 }
 
-/* Scroll reveal animations - Desktop only */
+/* Scroll reveal animations - All devices */
 .reveal-on-scroll {
-  opacity: 1;
+  opacity: 0;
+  will-change: transform, opacity, filter;
 }
 
-/* Desktop only: Enable scroll reveal animations */
-@media (min-width: 1025px) {
-  .reveal-on-scroll {
-    opacity: 0;
-    will-change: transform, opacity, filter;
-  }
-
-  .reveal-on-scroll.is-visible {
-    animation: revealInUp 0.72s cubic-bezier(0.2, 0.65, 0.2, 1) both;
-  }
+.reveal-on-scroll.is-visible {
+  animation: revealInUp 0.72s cubic-bezier(0.2, 0.65, 0.2, 1) both;
 }
 
-/* Desktop only: Direction-based animations */
-@media (min-width: 1025px) {
-  .reveal-on-scroll.from-left.is-visible {
-    animation-name: revealInLeft;
-  }
+/* Direction-based animations */
+.reveal-on-scroll.from-left.is-visible {
+  animation-name: revealInLeft;
+}
 
-  .reveal-on-scroll.from-right.is-visible {
-    animation-name: revealInRight;
-  }
+.reveal-on-scroll.from-right.is-visible {
+  animation-name: revealInRight;
 }
 
 @keyframes revealInUp {
@@ -1499,6 +1490,7 @@ h3 {
     flex: 0 0 auto;
     max-width: 180px;
     width: 180px;
+    height: 180px;
   }
   .award-card-img {
     height: 180px;
@@ -1601,6 +1593,7 @@ h3 {
   .education-img {
     max-width: 150px;
     width: 150px;
+    height: 150px;
   }
   .education-item h3 {
     font-size: 1.5rem;
@@ -1626,8 +1619,8 @@ h3 {
   flex: 0 0 200px;
   max-width: 200px;
   width: 200px;
-  height: auto;
-  border-radius: 12px;
+  height: 200px;
+  border-radius: 50%;
   box-shadow: 0 2px 12px rgba(139,0,0,0.13);
   border: 2px solid #232323;
   background: #fff;
