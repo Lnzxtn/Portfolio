@@ -1086,6 +1086,37 @@ h3 {
   padding: 0 20px;
 }
 
+/* Side-by-side project screenshot mode (used by Android calculator). */
+.project-modal-split-image {
+  display: none;
+}
+
+#projectModal.project-modal-split .project-modal-image .modal-image-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  min-height: auto;
+  align-items: start;
+}
+
+#projectModal.project-modal-split .project-modal-image .modal-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+}
+
+#projectModal.project-modal-split .project-modal-image .project-modal-split-image {
+  display: block;
+}
+
+/* Project screenshots should not force a white backdrop. */
+#projectModal .project-modal-image .modal-image {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 /* Project modal image carousel controls */
 .project-image-controls {
   margin-top: 12px;
@@ -1394,6 +1425,21 @@ h3 {
     max-height: 400px;
     flex: 1 1 auto;
   }
+
+  /* Keep project screenshots readable on mobile/tablet modals. */
+  #projectModal .modal-image-container .modal-image {
+    max-height: 72vh;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image {
+    max-height: 56vh;
+  }
+
   .modal-nav-btn {
     width: 35px;
     height: 35px;
@@ -1484,6 +1530,11 @@ h3 {
   .modal-image-container .modal-image {
     max-height: 300px;
   }
+
+  #projectModal .modal-image-container .modal-image {
+    max-height: 72vh;
+  }
+
   .modal-close {
     top: 10px;
     right: 10px;
@@ -1500,6 +1551,62 @@ h3 {
     width: 36px;
     height: 36px;
     font-size: 24px;
+  }
+}
+
+/* Project modal responsive tuning */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #projectModal .modal-content {
+    width: 96vw;
+    max-width: 980px;
+    max-height: 92vh;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image {
+    max-height: 62vh;
+  }
+
+  #projectModal .project-modal-text {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  #projectModal .modal-content {
+    width: 96vw;
+    max-height: 92vh;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image {
+    max-height: 48vh;
+  }
+
+  #projectModal .project-modal-text {
+    padding: 0 8px;
+  }
+}
+
+/* Desktop: pack split screenshots tightly side-by-side with no center gap. */
+@media (min-width: 1025px) {
+  #projectModal.project-modal-split .project-modal-image .modal-image-wrapper {
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    gap: 0;
+  }
+
+  #projectModal.project-modal-split .project-modal-image .modal-image {
+    width: auto;
+    max-height: 74vh;
   }
 }
 

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const projectModal = document.getElementById('projectModal');
     const projectCards = document.querySelectorAll('.project-card[data-project-image]');
     const projectModalImage = document.getElementById('projectModalImage');
+    const projectModalImageAlt = document.getElementById('projectModalImageAlt');
     const projectModalTitle = document.getElementById('projectModalTitle');
     const projectModalDescription = document.getElementById('projectModalDescription');
     const projectModalButtons = document.getElementById('projectModalButtons');
@@ -14,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let projectImages = [];
     let currentProjectImageIndex = 0;
+
+    function clearProjectModalLayoutClasses() {
+        if (!projectModal) return;
+        projectModal.classList.remove('project-modal-split');
+    }
 
     // Prevent modal from opening when clicking external project links
     const projectLinks = document.querySelectorAll('.project-view-btn');
@@ -31,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const title = this.getAttribute('data-project-title');
             const description = this.getAttribute('data-project-modal-description');
             const projectLink = this.getAttribute('data-project-link');
+            const projectLayout = this.getAttribute('data-project-layout');
+
+            clearProjectModalLayoutClasses();
 
             // Collect project images (data-project-image, data-project-image2, ... up to data-project-image14)
             projectImages = [];
@@ -44,6 +53,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (projectImages.length > 0) {
                 projectModalImage.src = projectImages[0];
             }
+            if (projectModalImageAlt) {
+                projectModalImageAlt.src = '';
+            }
+
+            const useSideBySide = projectLayout === 'side-by-side' && projectImages.length >= 2;
+            if (useSideBySide && projectModal) {
+                projectModal.classList.add('project-modal-split');
+                if (projectModalImageAlt) {
+                    projectModalImageAlt.src = projectImages[1];
+                }
+            }
+
             if (title) projectModalTitle.textContent = title;
             if (description) {
                 // Preserve line breaks and format the description
@@ -68,7 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Set up image controls (manual carousel, no auto-play)
             if (projectImageControls && projectImageDots) {
-                if (projectImages.length > 1) {
+                if (useSideBySide) {
+                    projectImageControls.style.display = 'none';
+                    projectImageDots.innerHTML = '';
+                } else if (projectImages.length > 1) {
                     projectImageControls.style.display = 'flex';
                     projectImageDots.innerHTML = '';
                     projectImages.forEach((_, idx) => {
@@ -93,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateProjectImage() {
         if (!projectImages.length) return;
+        if (projectModal && projectModal.classList.contains('project-modal-split')) return;
         if (currentProjectImageIndex < 0) currentProjectImageIndex = 0;
         if (currentProjectImageIndex > projectImages.length - 1) currentProjectImageIndex = projectImages.length - 1;
         projectModalImage.src = projectImages[currentProjectImageIndex];
@@ -127,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (projectModalClose) {
         projectModalClose.addEventListener('click', function() {
             projectModal.style.display = 'none';
+            clearProjectModalLayoutClasses();
             document.body.style.overflow = 'auto';
         });
     }
@@ -135,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', function(event) {
         if (event.target === projectModal) {
             projectModal.style.display = 'none';
+            clearProjectModalLayoutClasses();
             document.body.style.overflow = 'auto';
         }
     });
@@ -143,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && projectModal.style.display === 'flex') {
             projectModal.style.display = 'none';
+            clearProjectModalLayoutClasses();
             document.body.style.overflow = 'auto';
         }
     });
