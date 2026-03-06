@@ -179,10 +179,11 @@ window.addEventListener('scroll', function() {
 
 // Add typing animation for the logo
 const logo = document.querySelector('.logo');
-const text = 'LC';
+const text = logo ? logo.textContent : '';
 let index = 0;
 
 function typeWriter() {
+    if (!logo) return;
     if (index < text.length) {
         logo.textContent += text.charAt(index);
         index++;
@@ -201,18 +202,120 @@ window.addEventListener('load', () => {
 window.addEventListener('DOMContentLoaded', () => {
     const heroName = document.querySelector('.hero-name');
     if (heroName) {
-        const fullName = heroName.textContent;
-        heroName.textContent = '';
-        let i = 0;
-        function typeWriter() {
-            if (i < fullName.length) {
-                heroName.textContent += fullName.charAt(i);
-                i++;
-                setTimeout(typeWriter, 90);
+        const introText = "Hi, I'm ";
+        const names = ['Lance Christian Carillo', 'Lanz Xtian', 'Lance Christian Carillo'];
+        let nameIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        const typeSpeed = 90;
+        const deleteSpeed = 60;
+        const holdOnFullName = 1300;
+        const holdOnEmpty = 320;
+
+        function animateHeroName() {
+            const activeName = names[nameIndex];
+            const textContent = introText + activeName.slice(0, charIndex);
+            heroName.innerHTML = textContent + '<span class="typing-cursor"></span>';
+            heroName.classList.add('typing');
+
+            if (!isDeleting && charIndex < activeName.length) {
+                charIndex++;
+                setTimeout(animateHeroName, typeSpeed);
+                return;
             }
+
+            if (!isDeleting && charIndex === activeName.length) {
+                const isFinalName = nameIndex === names.length - 1;
+                if (isFinalName) {
+                    heroName.textContent = introText + activeName;
+                    heroName.classList.remove('typing');
+                    return;
+                }
+                isDeleting = true;
+                setTimeout(animateHeroName, holdOnFullName);
+                return;
+            }
+
+            if (isDeleting && charIndex > 0) {
+                charIndex--;
+                setTimeout(animateHeroName, deleteSpeed);
+                return;
+            }
+
+            isDeleting = false;
+            nameIndex++;
+            setTimeout(animateHeroName, holdOnEmpty);
         }
-        typeWriter();
+
+        heroName.textContent = introText;
+        setTimeout(animateHeroName, 300);
     }
+});
+
+// Reveal content with animation as it enters the viewport - Desktop only
+window.addEventListener('DOMContentLoaded', () => {
+    // Skip animations on mobile and tablet
+    const isDesktop = window.innerWidth > 1024;
+    if (!isDesktop) return;
+
+    const revealTargets = Array.from(document.querySelectorAll(
+        '.hero-info, .hero-image, #skills h2, .skills-description, .skills-container, #education h2, .education-item, #awards h2, .award-card, .certification-card, #projects h2, .project-card, .contact-subtitle, .contact-title, .contact-card, .site-footer'
+    ));
+
+    if (!revealTargets.length) return;
+
+    let alternatingDirection = 0;
+    revealTargets.forEach((element, index) => {
+        element.classList.add('reveal-on-scroll');
+        element.style.animationDelay = `${(index % 5) * 90}ms`;
+
+        if (element.matches('.hero-info')) {
+            element.classList.add('from-left');
+        } else if (element.matches('.hero-image')) {
+            element.classList.add('from-right');
+        } else if (element.matches('.education-item, .award-card, .certification-card, .project-card')) {
+            element.classList.add(alternatingDirection % 2 === 0 ? 'from-left' : 'from-right');
+            alternatingDirection++;
+        }
+    });
+
+    // Fallback for older browsers without IntersectionObserver
+    if (!('IntersectionObserver' in window)) {
+        revealTargets.forEach((element) => element.classList.add('is-visible'));
+        return;
+    }
+
+    // Make initial viewport content visible immediately
+    const makeInitialContentVisible = () => {
+        revealTargets.forEach((element) => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+                element.classList.add('is-visible');
+            }
+        });
+    };
+
+    makeInitialContentVisible();
+
+    // Set up IntersectionObserver for content below the fold
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting && !entry.target.classList.contains('is-visible')) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.14,
+        rootMargin: '0px 0px -10% 0px'
+    });
+
+    revealTargets.forEach((element) => {
+        if (!element.classList.contains('is-visible')) {
+            revealObserver.observe(element);
+        }
+    });
 });
 
 // Animate skill bars when they come into view
