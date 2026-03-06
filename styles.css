@@ -500,19 +500,6 @@ h3 {
   display: inline-block;
 }
 
-.hero-name.typing::after {
-  content: '';
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 1em;
-  background: #fff;
-  animation: blink-cursor 1s infinite;
-  opacity: 0.8;
-}
-
 .typing-cursor {
   display: inline;
   width: 0;
@@ -1477,10 +1464,6 @@ h3 {
     display: block;
   }
   
-  .hero-name.typing::after {
-    display: none;
-  }
-  
   .typing-cursor::after {
     width: 3px;
     height: 0.85em;
@@ -2043,10 +2026,6 @@ button, a, .project-card, .hero-btn, .hero-social-link {
   .hero-name {
     font-size: 2rem;
     display: block;
-  }
-  
-  .hero-name.typing::after {
-    display: none;
   }
   
   .typing-cursor::after {
