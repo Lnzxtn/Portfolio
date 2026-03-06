@@ -245,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalDescription = document.getElementById('modalDescription');
     const modalImage = document.getElementById('modalImage');
     const modalImage2 = document.getElementById('modalImage2');
+    const modalImage3 = document.getElementById('modalImage3');
     const modalPdfLink = document.getElementById('modalPdfLink');
     const modalFullImageLink = document.getElementById('modalFullImageLink');
     const closeBtn = document.querySelector('.modal-close');
@@ -317,6 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = this.getAttribute('data-description');
             const image = this.getAttribute('data-image');
             const image2 = this.getAttribute('data-image2');
+            const image3 = this.getAttribute('data-image3');
             const pdfLink = this.getAttribute('data-pdf');
             const fullImageLink = this.getAttribute('data-full-image');
 
@@ -338,6 +340,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 imageContainer.classList.remove('single-image');
             } else {
                 modalImage2.style.display = 'none';
+            }
+            // Handle third image if exists
+            if (image3) {
+                modalImage3.src = image3;
+                modalImage3.alt = title + ' - Additional Image';
+                images.push(modalImage3);
+                imageContainer.classList.remove('single-image');
+            } else {
+                modalImage3.style.display = 'none';
+            }
+            if (images.length === 1) {
                 imageContainer.classList.add('single-image');
             }
 
