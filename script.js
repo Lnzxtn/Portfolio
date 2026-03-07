@@ -1,6 +1,52 @@
-// Project Modal functionality
-document.addEventListener('DOMContentLoaded', function() {
+// ===== GLOBAL SCROLL LOCK SYSTEM =====
+let scrollPosition = 0;
+let isScrollLocked = false;
+
+function lockScroll() {
+    if (isScrollLocked) return;
+    
+    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Lock HTML and body with position fixed
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100%';
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = -scrollPosition + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    
+    isScrollLocked = true;
+}
+
+function unlockScroll() {
+    if (!isScrollLocked) return;
+    
+    // Remove all lock styles
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.height = '';
+    document.body.style.overflow = '';
+    document.body.style.height = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    
+    // Restore scroll position
+    window.scrollTo(0, scrollPosition);
+    
+    isScrollLocked = false;
+}
+// ===== END GLOBAL SCROLL LOCK SYSTEM =====
+
+// ===== PROJECT MODAL FUNCTIONALITY =====
+(function() {
     const projectModal = document.getElementById('projectModal');
+    if (!projectModal) return;
+
     const projectCards = document.querySelectorAll('.project-card[data-project-image]');
     const projectModalImage = document.getElementById('projectModalImage');
     const projectModalImageAlt = document.getElementById('projectModalImageAlt');
@@ -17,107 +63,105 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProjectImageIndex = 0;
 
     function clearProjectModalLayoutClasses() {
-        if (!projectModal) return;
         projectModal.classList.remove('project-modal-split');
     }
 
-    // Prevent modal from opening when clicking external project links
-    const projectLinks = document.querySelectorAll('.project-view-btn');
-    projectLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-    });
+    function openProjectModal(cardElement) {
+        const image = cardElement.getAttribute('data-project-image');
+        const title = cardElement.getAttribute('data-project-title');
+        const description = cardElement.getAttribute('data-project-modal-description');
+        const projectLink = cardElement.getAttribute('data-project-link');
+        const projectLayout = cardElement.getAttribute('data-project-layout');
 
-    // Open modal when project card is clicked
-    projectCards.forEach(card => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', function() {
-            const image = this.getAttribute('data-project-image');
-            const title = this.getAttribute('data-project-title');
-            const description = this.getAttribute('data-project-modal-description');
-            const projectLink = this.getAttribute('data-project-link');
-            const projectLayout = this.getAttribute('data-project-layout');
+        clearProjectModalLayoutClasses();
 
-            clearProjectModalLayoutClasses();
+        // Collect project images
+        projectImages = [];
+        if (image) projectImages.push(image);
+        for (let i = 2; i <= 14; i++) {
+            const extra = cardElement.getAttribute('data-project-image' + i);
+            if (extra) projectImages.push(extra);
+        }
+        currentProjectImageIndex = 0;
 
-            // Collect project images (data-project-image, data-project-image2, ... up to data-project-image14)
-            projectImages = [];
-            if (image) projectImages.push(image);
-            for (let i = 2; i <= 14; i++) {
-                const extra = this.getAttribute('data-project-image' + i);
-                if (extra) projectImages.push(extra);
+        if (projectImages.length > 0) {
+            projectModalImage.src = projectImages[0];
+        }
+        projectModalImageAlt.src = '';
+
+        const useSideBySide = projectLayout === 'side-by-side' && projectImages.length >= 2;
+        if (useSideBySide) {
+            projectModal.classList.add('project-modal-split');
+            projectModalImageAlt.src = projectImages[1];
+        }
+
+        projectModalTitle.textContent = title || '';
+        if (description) {
+            const statusMatch = description.match(/^(Project Status:.*?)(\n\n|$)/);
+            if (statusMatch) {
+                const statusText = statusMatch[1];
+                const restOfText = description.replace(statusMatch[0], '').trim();
+                projectModalDescription.innerHTML = '<span class="project-status-highlight">' + statusText + '</span>' + (restOfText ? '\n\n' + restOfText : '');
+            } else {
+                projectModalDescription.textContent = description;
             }
-            currentProjectImageIndex = 0;
+            projectModalDescription.style.whiteSpace = 'pre-line';
+        }
 
-            if (projectImages.length > 0) {
-                projectModalImage.src = projectImages[0];
-            }
-            if (projectModalImageAlt) {
-                projectModalImageAlt.src = '';
-            }
+        // Add View button if project link exists
+        if (projectLink) {
+            projectModalButtons.innerHTML = '<a href="' + projectLink + '" class="project-view-btn" target="_blank" rel="noopener noreferrer">View</a>';
+        } else {
+            projectModalButtons.innerHTML = '';
+        }
 
-            const useSideBySide = projectLayout === 'side-by-side' && projectImages.length >= 2;
-            if (useSideBySide && projectModal) {
-                projectModal.classList.add('project-modal-split');
-                if (projectModalImageAlt) {
-                    projectModalImageAlt.src = projectImages[1];
-                }
-            }
-
-            if (title) projectModalTitle.textContent = title;
-            if (description) {
-                // Preserve line breaks and format the description
-                // Highlight Project Status section (now at the beginning)
-                const statusMatch = description.match(/^(Project Status:.*?)(\n\n|$)/);
-                if (statusMatch) {
-                    const statusText = statusMatch[1];
-                    const restOfText = description.replace(statusMatch[0], '').trim();
-                    projectModalDescription.innerHTML = '<span class="project-status-highlight">' + statusText + '</span>' + (restOfText ? '\n\n' + restOfText : '');
-                } else {
-                    projectModalDescription.textContent = description;
-                }
-                projectModalDescription.style.whiteSpace = 'pre-line';
-            }
-
-            // Add View button if project link exists
-            if (projectLink && projectModalButtons) {
-                projectModalButtons.innerHTML = '<a href="' + projectLink + '" class="project-view-btn" target="_blank" rel="noopener noreferrer">View</a>';
-            } else if (projectModalButtons) {
-                projectModalButtons.innerHTML = '';
-            }
-
-            // Set up image controls (manual carousel, no auto-play)
-            if (projectImageControls && projectImageDots) {
-                if (useSideBySide) {
-                    projectImageControls.style.display = 'none';
-                    projectImageDots.innerHTML = '';
-                } else if (projectImages.length > 1) {
-                    projectImageControls.style.display = 'flex';
-                    projectImageDots.innerHTML = '';
-                    projectImages.forEach((_, idx) => {
-                        const dot = document.createElement('div');
-                        dot.className = 'project-image-dot' + (idx === 0 ? ' active' : '');
-                        dot.addEventListener('click', () => {
-                            currentProjectImageIndex = idx;
-                            updateProjectImage();
-                        });
-                        projectImageDots.appendChild(dot);
+        // Set up image controls
+        if (projectImageControls && projectImageDots) {
+            if (useSideBySide) {
+                projectImageControls.style.display = 'none';
+                projectImageDots.innerHTML = '';
+            } else if (projectImages.length > 1) {
+                projectImageControls.style.display = 'flex';
+                projectImageDots.innerHTML = '';
+                projectImages.forEach((_, idx) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'project-image-dot' + (idx === 0 ? ' active' : '');
+                    dot.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        currentProjectImageIndex = idx;
+                        updateProjectImage();
                     });
-                } else {
-                    projectImageControls.style.display = 'none';
-                    projectImageDots.innerHTML = '';
-                }
+                    projectImageDots.appendChild(dot);
+                });
+            } else {
+                projectImageControls.style.display = 'none';
+                projectImageDots.innerHTML = '';
             }
+        }
 
-            projectModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-    });
+        projectModal.classList.add('open');
+        lockScroll();
+    }
+
+    function closeProjectModal() {
+        if (!projectModal) return;
+        projectModal.classList.remove('open');
+        clearProjectModalLayoutClasses();
+
+        // Check if other modals are open before unlocking
+        const awardModal = document.getElementById('awardModal');
+        const certificateViewerModal = document.getElementById('certificateViewerModal');
+        const isAwardModalOpen = awardModal && awardModal.classList.contains('open');
+        const isCertificateViewerOpen = certificateViewerModal && certificateViewerModal.classList.contains('open');
+        
+        if (!isAwardModalOpen && !isCertificateViewerOpen) {
+            unlockScroll();
+        }
+    }
 
     function updateProjectImage() {
         if (!projectImages.length) return;
-        if (projectModal && projectModal.classList.contains('project-modal-split')) return;
+        if (projectModal.classList.contains('project-modal-split')) return;
         if (currentProjectImageIndex < 0) currentProjectImageIndex = 0;
         if (currentProjectImageIndex > projectImages.length - 1) currentProjectImageIndex = projectImages.length - 1;
         projectModalImage.src = projectImages[currentProjectImageIndex];
@@ -130,8 +174,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Open modal when project card is clicked
+    projectCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            openProjectModal(this);
+        });
+    });
+
+    // Image navigation
     if (projectPrevImageBtn) {
-        projectPrevImageBtn.addEventListener('click', (e) => {
+        projectPrevImageBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             if (projectImages.length <= 1) return;
             currentProjectImageIndex = (currentProjectImageIndex - 1 + projectImages.length) % projectImages.length;
@@ -140,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (projectNextImageBtn) {
-        projectNextImageBtn.addEventListener('click', (e) => {
+        projectNextImageBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             if (projectImages.length <= 1) return;
             currentProjectImageIndex = (currentProjectImageIndex + 1) % projectImages.length;
@@ -148,33 +202,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Close modal
+    // Close modal handlers
     if (projectModalClose) {
-        projectModalClose.addEventListener('click', function() {
-            projectModal.style.display = 'none';
-            clearProjectModalLayoutClasses();
-            document.body.style.overflow = 'auto';
+        projectModalClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeProjectModal();
         });
     }
 
-    // Close modal when clicking outside
-    window.addEventListener('click', function(event) {
+    projectModal.addEventListener('click', function(event) {
         if (event.target === projectModal) {
-            projectModal.style.display = 'none';
-            clearProjectModalLayoutClasses();
-            document.body.style.overflow = 'auto';
+            closeProjectModal();
         }
     });
 
-    // Close modal with Escape key
     document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && projectModal.style.display === 'flex') {
-            projectModal.style.display = 'none';
-            clearProjectModalLayoutClasses();
-            document.body.style.overflow = 'auto';
+        if (event.key === 'Escape' && projectModal.classList.contains('open')) {
+            closeProjectModal();
         }
     });
-});
+})();
+// ===== END PROJECT MODAL FUNCTIONALITY =====
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -380,8 +428,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalImage = document.getElementById('modalImage');
     const modalImage2 = document.getElementById('modalImage2');
     const modalImage3 = document.getElementById('modalImage3');
-    const modalPdfLink = document.getElementById('modalPdfLink');
     const modalFullImageLink = document.getElementById('modalFullImageLink');
+    const certificateViewerModal = document.getElementById('certificateViewerModal');
+    const certificateViewerImage = document.getElementById('certificateViewerImage');
+    const certificateViewerClose = document.getElementById('certificateViewerClose');
     const closeBtn = document.querySelector('.modal-close');
     const awardCards = document.querySelectorAll('.award-card, .certification-card');
     const prevBtn = document.querySelector('.modal-prev-btn');
@@ -391,6 +441,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentImageIndex = 0;
     let images = [];
+
+    function isCertificateViewerOpen() {
+        return Boolean(certificateViewerModal && certificateViewerModal.classList.contains('open'));
+    }
+
+    function openCertificateViewer(imageSrc, imageAlt) {
+        if (!certificateViewerModal || !certificateViewerImage || !imageSrc) return;
+        certificateViewerImage.src = imageSrc;
+        certificateViewerImage.alt = imageAlt || 'Certificate preview';
+        certificateViewerModal.removeAttribute('inert');
+        certificateViewerModal.classList.add('open');
+        document.body.classList.add('certificate-viewer-open');
+        lockScroll();
+    }
+
+    function closeCertificateViewer() {
+        if (!certificateViewerModal || !certificateViewerImage) return;
+        certificateViewerModal.classList.remove('open');
+        certificateViewerModal.setAttribute('inert', '');
+        certificateViewerImage.removeAttribute('src');
+        document.body.classList.remove('certificate-viewer-open');
+
+        const projectModal = document.getElementById('projectModal');
+        const isAwardModalOpen = modal && modal.classList.contains('open');
+        const isProjectModalOpen = projectModal && projectModal.classList.contains('open');
+        if (!isAwardModalOpen && !isProjectModalOpen) {
+            unlockScroll();
+        }
+    }
 
     // Function to show specific image
     function showImage(index) {
@@ -453,7 +532,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const image = this.getAttribute('data-image');
             const image2 = this.getAttribute('data-image2');
             const image3 = this.getAttribute('data-image3');
-            const pdfLink = this.getAttribute('data-pdf');
             const fullImageLink = this.getAttribute('data-full-image');
 
             modalTitle.textContent = title;
@@ -495,48 +573,52 @@ document.addEventListener('DOMContentLoaded', function() {
             currentImageIndex = 0;
             showImage(0);
 
-            // Show only one button: PDF button if PDF exists, otherwise full image button
-            if (pdfLink && modalPdfLink) {
-                // If PDF exists, show PDF button and hide image button
-                modalPdfLink.setAttribute('href', pdfLink);
-                modalPdfLink.href = pdfLink;
-                modalPdfLink.target = '_blank';
-                modalPdfLink.rel = 'noopener noreferrer';
-                modalPdfLink.style.display = 'inline-block';
-                // Clear any onclick handlers
-                modalPdfLink.onclick = null;
-                // Hide the full image button
-                if (modalFullImageLink) {
-                    modalFullImageLink.style.display = 'none';
-                }
-            } else if (fullImageLink && modalFullImageLink) {
-                // If no PDF but full image exists, show image button
-                // Set href using both methods to ensure it works
-                modalFullImageLink.setAttribute('href', fullImageLink);
-                modalFullImageLink.href = fullImageLink;
-                modalFullImageLink.target = '_blank';
-                modalFullImageLink.rel = 'noopener noreferrer';
+            // Always open a certificate image (full image if provided, otherwise main image).
+            const certificateImageLink = fullImageLink || image;
+
+            if (certificateImageLink && modalFullImageLink) {
+                modalFullImageLink.setAttribute('href', '#');
+                modalFullImageLink.setAttribute('data-image-src', certificateImageLink);
+                modalFullImageLink.removeAttribute('target');
+                modalFullImageLink.removeAttribute('rel');
                 modalFullImageLink.style.display = 'inline-block';
-                // Clear any onclick handlers
                 modalFullImageLink.onclick = null;
-                // Hide the PDF button
-                if (modalPdfLink) {
-                    modalPdfLink.style.display = 'none';
-                }
-            } else {
-                // Hide both if neither exists
-                if (modalFullImageLink) {
-                    modalFullImageLink.style.display = 'none';
-                }
-                if (modalPdfLink) {
-                    modalPdfLink.style.display = 'none';
-                }
+            } else if (modalFullImageLink) {
+                modalFullImageLink.removeAttribute('data-image-src');
+                modalFullImageLink.style.display = 'none';
             }
 
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            modal.classList.add('open');
+            lockScroll();
         });
     });
+
+    if (modalFullImageLink) {
+        modalFullImageLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const imageSrc = this.getAttribute('data-image-src');
+            const imageAlt = modalTitle ? (modalTitle.textContent + ' Certificate') : 'Certificate preview';
+            openCertificateViewer(imageSrc, imageAlt);
+        });
+    }
+
+    if (certificateViewerClose) {
+        certificateViewerClose.addEventListener('click', function(event) {
+            event.stopPropagation();
+            closeCertificateViewer();
+        });
+    }
+
+    if (certificateViewerModal) {
+        certificateViewerModal.addEventListener('click', function(event) {
+            if (event.target === certificateViewerModal) {
+                closeCertificateViewer();
+            }
+        });
+        // Initialize as inert on page load
+        certificateViewerModal.setAttribute('inert', '');
+    }
 
     // Navigation button events
     nextBtn.addEventListener('click', () => {
@@ -549,7 +631,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Keyboard navigation
     document.addEventListener('keydown', function(event) {
-        if (modal.style.display === 'flex') {
+        if (event.key === 'Escape' && isCertificateViewerOpen()) {
+            closeCertificateViewer();
+            return;
+        }
+
+        if (modal.classList.contains('open')) {
             if (event.key === 'Escape') {
                 closeModal();
             } else if (event.key === 'ArrowRight' && images.length > 1) {
@@ -562,8 +649,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close modal function
     function closeModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        closeCertificateViewer();
+        modal.classList.remove('open');
+        
+        // Check if other modals are open before unlocking
+        const projectModal = document.getElementById('projectModal');
+        const certificateViewerModal = document.getElementById('certificateViewerModal');
+        const isProjectModalOpen = projectModal && projectModal.classList.contains('open');
+        const isCertificateViewerOpen = certificateViewerModal && certificateViewerModal.classList.contains('open');
+        if (!isProjectModalOpen && !isCertificateViewerOpen) {
+            unlockScroll();
+        }
     }
 
     // Close modal when close button is clicked
@@ -688,4 +784,101 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize both carousels
     setupCarouselIndicators(certificationsGrid, certificationsIndicators);
     setupCarouselIndicators(projectsGrid, projectsIndicators);
+});
+
+// Scroll-based Navigation Highlighting
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    let isScrolling = false;
+
+    function highlightNavOnScroll() {
+        const scrollPosition = window.scrollY + 150;
+        
+        let currentSection = '';
+        let maxMatch = -1;
+
+        // Find which section is currently most visible
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const sectionBottom = sectionTop + sectionHeight;
+
+            // Check if scroll position is within this section
+            if (scrollPosition >= sectionTop - 150 && scrollPosition < sectionBottom) {
+                // Calculate how much of this section is visible
+                const visibleAmount = Math.min(scrollPosition - sectionTop + 150, sectionHeight);
+                if (visibleAmount > maxMatch) {
+                    maxMatch = visibleAmount;
+                    currentSection = sectionId;
+                }
+            }
+        });
+
+        // If at the very top, always show home
+        if (window.scrollY < 100) {
+            currentSection = 'home';
+        }
+
+        // Update active states - remove ALL first
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Then add to current section only
+        if (currentSection) {
+            const activeLink = document.querySelector(`.nav-links a[href="#${currentSection}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+
+    // Run on scroll with debouncing
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        isScrolling = true;
+        clearTimeout(scrollTimeout);
+        
+        highlightNavOnScroll();
+        
+        scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+            highlightNavOnScroll();
+        }, 100);
+    }, { passive: true });
+
+    // Handle nav link clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const target = e.currentTarget;
+            
+            // Immediately remove focus to prevent stuck state
+            target.blur();
+            
+            // Clear all active classes immediately
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Set active on clicked link temporarily
+            target.classList.add('active');
+            
+            // Then let scroll detection take over after animation
+            setTimeout(() => {
+                highlightNavOnScroll();
+            }, 100);
+            setTimeout(() => {
+                highlightNavOnScroll();
+            }, 300);
+            setTimeout(() => {
+                highlightNavOnScroll();
+            }, 600);
+            setTimeout(() => {
+                highlightNavOnScroll();
+            }, 1000);
+        });
+    });
+
+    // Initial run
+    setTimeout(highlightNavOnScroll, 100);
 });
