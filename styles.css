@@ -2433,6 +2433,15 @@ button, a, .project-card, .hero-btn, .hero-social-link {
     gap: 22px;
   }
 
+  /* Ensure active state is visible on tablet */
+  .nav-links li a.active {
+    color: #8b0000 !important;
+  }
+
+  .nav-links li a.active::after {
+    width: 100% !important;
+  }
+
   .hero-info {
     max-width: 560px;
   }
@@ -2454,6 +2463,15 @@ button, a, .project-card, .hero-btn, .hero-social-link {
     justify-content: center;
     flex-wrap: wrap;
     gap: 14px;
+  }
+
+  /* Ensure active state is visible on mobile */
+  .nav-links li a.active {
+    color: #8b0000 !important;
+  }
+
+  .nav-links li a.active::after {
+    width: 100% !important;
   }
 
   .hero-buttons {
@@ -2481,10 +2499,31 @@ button, a, .project-card, .hero-btn, .hero-social-link {
   }
 }
 
+/* Medium mobile / Small tablet (between mobile and tablet) */
+@media (min-width: 601px) and (max-width: 767px) {
+  /* Ensure active state is visible on medium devices */
+  .nav-links li a.active {
+    color: #8b0000 !important;
+  }
+
+  .nav-links li a.active::after {
+    width: 100% !important;
+  }
+}
+
 /* Small phones */
 @media (max-width: 420px) {
   .navbar-container {
     padding: 12px 10px 8px 10px;
+  }
+
+  /* Ensure active state is visible on small phones */
+  .nav-links li a.active {
+    color: #8b0000 !important;
+  }
+
+  .nav-links li a.active::after {
+    width: 100% !important;
   }
 
   .hero-info {

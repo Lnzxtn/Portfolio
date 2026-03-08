@@ -798,27 +798,40 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentSection = '';
         let maxMatch = -1;
 
-        // Find which section is currently most visible
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            const sectionBottom = sectionTop + sectionHeight;
+        // Check if we're at or near the bottom of the page
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const isAtBottom = (window.scrollY + windowHeight >= documentHeight - 50);
 
-            // Check if scroll position is within this section
-            if (scrollPosition >= sectionTop - 150 && scrollPosition < sectionBottom) {
-                // Calculate how much of this section is visible
-                const visibleAmount = Math.min(scrollPosition - sectionTop + 150, sectionHeight);
-                if (visibleAmount > maxMatch) {
-                    maxMatch = visibleAmount;
-                    currentSection = sectionId;
-                }
+        // If at or near bottom, highlight the last section (contact)
+        if (isAtBottom) {
+            const lastSection = sections[sections.length - 1];
+            if (lastSection) {
+                currentSection = lastSection.getAttribute('id');
             }
-        });
+        } else {
+            // Find which section is currently most visible
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                const sectionBottom = sectionTop + sectionHeight;
 
-        // If at the very top, always show home
-        if (window.scrollY < 100) {
-            currentSection = 'home';
+                // Check if scroll position is within this section
+                if (scrollPosition >= sectionTop - 150 && scrollPosition < sectionBottom) {
+                    // Calculate how much of this section is visible
+                    const visibleAmount = Math.min(scrollPosition - sectionTop + 150, sectionHeight);
+                    if (visibleAmount > maxMatch) {
+                        maxMatch = visibleAmount;
+                        currentSection = sectionId;
+                    }
+                }
+            });
+
+            // If at the very top, always show home
+            if (window.scrollY < 100) {
+                currentSection = 'home';
+            }
         }
 
         // Update active states - remove ALL first
