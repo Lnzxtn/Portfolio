@@ -37,8 +37,9 @@
                     <a href="#contact" class="hero-btn hero-btn-outline">Contact</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="profile/Lance.png" alt="Lance Christian Carillo" />
+            <div class="hero-image" role="button" tabindex="0" aria-label="Show alternate profile image">
+                <img src="profile/Lance.png" alt="Lance Christian Carillo" class="default-avatar" />
+                <img src="profile/lnzz.png" alt="" aria-hidden="true" class="hover-avatar" />
             </div>
         </div>
     </section>
@@ -156,6 +157,13 @@
                         <p>Cisco Networking Academy</p>
                     </div>
                 </div>
+                <div class="certification-card" data-title="Sorsogon Provincial ICT Congress 2026" data-institution="SPICT CON 2026" data-description="Certificate of Participation awarded in recognition of valuable support and contribution to innovation, collaboration, and digital transformation through active participation in the Sorsogon Provincial ICT Congress 2026. Held on March 11, 2026 at Sorsogon Provincial Gymnasium." data-image="Certifications/ICT CONGRESS CERTIFICATE.jpg" data-full-image="Certifications/ICT CONGRESS CERTIFICATE.jpg">
+                    <img src="Certifications/ICT CONGRESS CERTIFICATE.jpg" alt="Sorsogon Provincial ICT Congress 2026 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>ICT Congress 2026</h3>
+                        <p>SPICT CON 2026</p>
+                    </div>
+                </div>
                 </div>
                 <button class="awards-nav awards-next" aria-label="Next certification">&gt;</button>
             </div>
@@ -186,7 +194,7 @@
                         <p class="modal-institution" id="modalInstitution"></p>
                         <p class="modal-description" id="modalDescription"></p>
                         <div class="modal-buttons">
-                            <a id="modalFullImageLink" href="" target="_blank" rel="noopener noreferrer" class="modal-full-image-link" style="display: none;">View Certificate</a>
+                            <button id="modalFullImageLink" type="button" class="modal-full-image-link" style="display: none;">View Certificate</button>
                         </div>
                     </div>
                 </div>

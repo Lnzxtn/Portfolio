@@ -277,6 +277,8 @@ window.addEventListener('load', () => {
 // Typing effect for hero name
 window.addEventListener('DOMContentLoaded', () => {
     const heroName = document.querySelector('.hero-name');
+    const heroImage = document.querySelector('.hero-image');
+    let heroImageTapTimeoutId;
     if (heroName) {
         const introText = "Hi, I'm ";
         const names = ['Lance Christian Carillo', 'Lanz Xtian', 'Lance Christian Carillo'];
@@ -289,8 +291,28 @@ window.addEventListener('DOMContentLoaded', () => {
         const holdOnFullName = 1300;
         const holdOnEmpty = 320;
 
+        function isTapRevealDevice() {
+            return window.matchMedia('(max-width: 1024px)').matches || window.matchMedia('(hover: none)').matches;
+        }
+
+        function syncHeroAvatar(activeName) {
+            if (!heroImage) return;
+            heroImage.classList.toggle('show-lnzz', activeName === 'Lanz Xtian');
+        }
+
+        function triggerTemporaryHeroAvatarReveal() {
+            if (!heroImage || !isTapRevealDevice()) return;
+
+            heroImage.classList.add('show-lnzz-tap');
+            clearTimeout(heroImageTapTimeoutId);
+            heroImageTapTimeoutId = setTimeout(() => {
+                heroImage.classList.remove('show-lnzz-tap');
+            }, 5000);
+        }
+
         function animateHeroName() {
             const activeName = names[nameIndex];
+            syncHeroAvatar(activeName);
             const textContent = introText + activeName.slice(0, charIndex);
             heroName.innerHTML = textContent + '<span class="typing-cursor"></span>';
             heroName.classList.add('typing');
@@ -325,6 +347,17 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         heroName.textContent = introText;
+        syncHeroAvatar(names[nameIndex]);
+
+        if (heroImage) {
+            heroImage.addEventListener('click', triggerTemporaryHeroAvatarReveal);
+            heroImage.addEventListener('keydown', (event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                triggerTemporaryHeroAvatarReveal();
+            });
+        }
+
         setTimeout(animateHeroName, 300);
     }
 });
@@ -577,12 +610,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const certificateImageLink = fullImageLink || image;
 
             if (certificateImageLink && modalFullImageLink) {
-                modalFullImageLink.setAttribute('href', '#');
                 modalFullImageLink.setAttribute('data-image-src', certificateImageLink);
-                modalFullImageLink.removeAttribute('target');
-                modalFullImageLink.removeAttribute('rel');
                 modalFullImageLink.style.display = 'inline-block';
-                modalFullImageLink.onclick = null;
             } else if (modalFullImageLink) {
                 modalFullImageLink.removeAttribute('data-image-src');
                 modalFullImageLink.style.display = 'none';
@@ -595,7 +624,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (modalFullImageLink) {
         modalFullImageLink.addEventListener('click', function(event) {
-            event.preventDefault();
             event.stopPropagation();
             const imageSrc = this.getAttribute('data-image-src');
             const imageAlt = modalTitle ? (modalTitle.textContent + ' Certificate') : 'Certificate preview';

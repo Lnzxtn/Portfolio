@@ -580,20 +580,52 @@ h3 {
 }
 
 .hero-image {
+  --hero-avatar-size: 260px;
   flex: 0 0 280px;
+  position: relative;
+  width: var(--hero-avatar-size);
+  height: var(--hero-avatar-size);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .hero-image img {
-  width: 260px;
-  height: 260px;
+  width: var(--hero-avatar-size);
+  height: var(--hero-avatar-size);
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 6px 32px rgba(139,0,0,0.18), 0 1.5px 8px rgba(0,0,0,0.10);
   background: linear-gradient(120deg, #232323 60%, #181818 100%);
   border: 5px solid #232323;
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.28s ease;
+}
+
+.hero-image .default-avatar {
+  opacity: 1;
+}
+
+.hero-image .hover-avatar {
+  opacity: 0;
+}
+
+.hero-image.show-lnzz .default-avatar,
+.hero-image.show-lnzz-tap .default-avatar,
+.hero-image:hover .default-avatar {
+  opacity: 0;
+}
+
+.hero-image.show-lnzz .hover-avatar,
+.hero-image.show-lnzz-tap .hover-avatar,
+.hero-image:hover .hover-avatar {
+  opacity: 1;
+}
+
+.hero-image:focus-visible {
+  outline: 2px solid #8b0000;
+  outline-offset: 6px;
 }
 
 .hero-info {
@@ -1484,11 +1516,13 @@ h3 {
   background: #8b0000;
   color: #fff;
   text-decoration: none;
+  border: none;
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s ease;
   font-size: 1rem;
   cursor: pointer;
+  font-family: inherit;
   pointer-events: auto;
   z-index: 100;
   position: relative;
@@ -1900,10 +1934,13 @@ body.certificate-viewer-open .modal-close {
     flex-direction: column;
     gap: 6px; /* tighter gap between photo and card */
     align-items: center;
+    justify-content: flex-start;
   }
-  .hero-image img {
-    width: 240px;
-    height: 240px;
+  .hero-image {
+    --hero-avatar-size: 240px;
+    flex: 0 0 auto;
+    cursor: pointer;
+    touch-action: manipulation;
   }
   /* Show profile photo above text on tablet/mobile */
   .hero-image {
@@ -1911,9 +1948,12 @@ body.certificate-viewer-open .modal-close {
     margin-bottom: -8px; /* pull card slightly closer to photo */
   }
   .hero-info {
+    flex: 0 1 auto;
+    min-width: 0;
     align-items: center;
+    justify-content: flex-start;
     max-width: 95vw;
-    padding: 14px 24px 18px 24px; /* smaller top padding */
+    padding: 8px 24px 18px 24px; /* pull heading closer to the image */
     margin-top: 0;
   }
   .hero-name {
@@ -2048,9 +2088,8 @@ body.certificate-viewer-open .modal-close {
     font-size: 2rem;
     margin: 30px 0 18px 0;
   }
-  .hero-image img {
-    width: 150px;
-    height: 150px;
+  .hero-image {
+    --hero-avatar-size: 150px;
   }
   .hero-info {
     min-width: 0;
