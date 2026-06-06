@@ -14,6 +14,7 @@
             <div class="logo">ㄥ几乙</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -37,12 +38,38 @@
                     <a href="#contact" class="hero-btn hero-btn-outline">Contact</a>
                 </div>
             </div>
-            <div class="hero-image" role="button" tabindex="0" aria-label="Show alternate profile image">
+            <div class="hero-image">
                 <img src="profile/Lance.png" alt="Lance Christian Carillo" class="default-avatar" />
-                <img src="profile/lnzz.png" alt="" aria-hidden="true" class="hover-avatar" />
             </div>
         </div>
     </section>
+
+        <!-- Info Modal for Experience Details -->
+        <div id="infoModal" class="modal" aria-hidden="true">
+            <div class="modal-shell">
+                <span class="modal-close" id="infoModalClose">&times;</span>
+                <div class="modal-content">
+                    <div class="modal-body info-modal-body">
+                        <div class="info-modal-carousel" id="infoModalCarousel" hidden>
+                            <div class="info-carousel-image-wrapper">
+                                <img id="infoModalImage" src="" alt="DICT internship photo" class="info-carousel-image" />
+                            </div>
+                            <div class="info-carousel-controls">
+                                <button type="button" class="modal-nav-btn info-carousel-prev" id="infoCarouselPrev" aria-label="Previous photo">&lt;</button>
+                                <span class="info-carousel-counter" id="infoCarouselCounter">1 / 1</span>
+                                <button type="button" class="modal-nav-btn info-carousel-next" id="infoCarouselNext" aria-label="Next photo">&gt;</button>
+                            </div>
+                        </div>
+                        <div class="modal-text">
+                            <h2 id="infoModalTitle">Experience Details</h2>
+                            <p id="infoModalRole" class="modal-role"></p>
+                            <p class="modal-date" id="infoModalDate"></p>
+                            <p class="modal-description" id="infoModalDescription"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <section id="skills" class="section">
         <div class="container">
@@ -71,16 +98,32 @@
         </div>
     </section>
 
+    <section id="experience" class="section">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="education-item" data-photos="dict" data-description="As an Intern at the Department of Information and Communications Technology (DICT) Region V – Sorsogon Provincial Office, I provided internet connectivity support during government programs and community activities, assisted with network setup and troubleshooting, supported administrative and documentation tasks, and helped promote digital government services. This 500-hour internship strengthened my technical, communication, teamwork, and problem-solving skills in both office and field environments." data-date="January 2026 - April 2026">
+                <img src="Experience/DICT/DIct logo.png" alt="DICT Logo" class="education-img" />
+                <div class="education-content">
+                    <h3>Intern — Department of Information and Communications Technology (DICT) Region V – Sorsogon</h3>
+                    <p class="education-role">Support Staff</p>
+                    <p class="education-location">DICT Region V – Sorsogon Provincial Office</p>
+                    <p class="education-date">January 2026 - April 2026</p>
+                    <div style="margin-top:12px;"><button class="experience-view-btn">View</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="education" class="section">
         <div class="container">
             <h2>Education</h2>
             <div class="education-item">
                 <img src="Education/ccdi.png" alt="CCDI Logo" class="education-img" />
                 <div class="education-content">
-                    <h3>Computer Communication Development Institute</h3>
+                    <h3>Computer Communication Development Institute (CCDI) Sorsogon</h3>
                     <p class="education-program">Bachelor of Science in Information Technology (BSIT)</p>
                     <p class="education-location">Rizal St., Bitan-o, Sorsogon City, Sorsogon, Philippines</p>
-                    <p class="education-date"><strong>Expected Graduation:</strong> 2026</p>
+                    <p class="education-date">2022–2026</p>
                 </div>
             </div>
             <div class="education-item">
@@ -92,6 +135,22 @@
                     <p class="education-date">2020–2022</p>
                 </div>
             </div>
+            <div class="education-item">
+                <img src="Education/General%20Licerio%20Topacio%20National%20High%20School.png" alt="General Licerio Topacio National High School" class="education-img" />
+                <div class="education-content">
+                    <h3>General Licerio Topacio National High School</h3>
+                    <p class="education-location">Pasong Buaya II, Imus City, Cavite</p>
+                    <p class="education-date">2019–2020</p>
+                </div>
+            </div>
+            <div class="education-item">
+                <img src="Education/Pembo.png" alt="Pembo Elementary School" class="education-img" />
+                <div class="education-content">
+                    <h3>Pembo Elementary School</h3>
+                    <p class="education-location">Escarlata Street, Pembo, Taguig City</p>
+                    <p class="education-date">2013–2016</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -101,17 +160,59 @@
             <div class="awards-carousel">
                 <button class="awards-nav awards-prev" aria-label="Previous certification">&lt;</button>
                 <div class="awards-grid">
-                <div class="award-card" data-title="Certificate of Achievement" data-institution="Computer Communication Development Institute" data-description="Awarded for academic excellence (Dean's Lister). General Weighted Average: 1.51. Date: February 14, 2024." data-image="Certifications/Certificate of Achievement.png" data-full-image="Certifications/Certificate of Achievement.png">
-                    <img src="Certifications/Certificate of Achievement.png" alt="Certificate of Achievement" class="award-card-img" />
+                <div class="certification-card" data-title="Certificate of Recognition — Academic Distinction" data-institution="Computer Communication Development Institute (CCDI)" data-description="Certificate of Recognition with Academic Distinction awarded by CCDI." data-date="May 25, 2026" data-image="Certifications/ACADEMIC DISTINCTION.jpg" data-image2="Certifications/Graduation.jpg" data-image3="Certifications/Toga%20pic.jpg" data-video="Certifications/Graduation.mov" data-full-image="Certifications/ACADEMIC DISTINCTION.jpg">
+                    <img src="Certifications/ACADEMIC DISTINCTION.jpg" alt="Academic Distinction Certificate" class="award-card-img" />
                     <div class="award-card-content">
-                        <h3>Certificate of Achievement</h3>
-                        <p>Computer Communication Development Institute</p>
+                        <h3>Certificate of Recognition — Academic Distinction</h3>
+                        <p>Computer Communication Development Institute (CCDI)</p>
                     </div>
                 </div>
-                <div class="certification-card" data-title="Introduction to Cybersecurity" data-institution="Cisco Networking Academy" data-description="Successfully completed the Introduction to Cybersecurity course. Proficiencies include: explaining the basics of being safe online, understanding common cyber threats and attacks, protecting oneself while online, understanding how organizations can protect their operations, and exploring career options in cybersecurity. Issued on: August 27, 2024." data-image="Certifications/Introduction to Cybersecurity.jpg" data-full-image="Certifications/Introduction to Cybersecurity.jpg">
-                    <img src="Certifications/Introduction to Cybersecurity.jpg" alt="Introduction to Cybersecurity Certificate" class="award-card-img" />
+                <div class="certification-card" data-title="Sorsogon Internship Program - Apprenticeship" data-institution="ILCDB / DICT Region V" data-description="Completed the 500-hour Sorsogon Internship Program (Apprenticeship) under ILCDB (DICT Region V)." data-image="Certifications/INTERNSHIP PROGRAM.jpg" data-full-image="Certifications/INTERNSHIP PROGRAM.jpg">
+                    <img src="Certifications/INTERNSHIP PROGRAM.jpg" alt="Internship Program Certificate" class="award-card-img" />
                     <div class="award-card-content">
-                        <h3>Introduction to Cybersecurity</h3>
+                        <h3>Sorsogon Internship Program — Apprenticeship</h3>
+                        <p>ILCDB / DICT Region V</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="Sorsogon Provincial ICT Congress 2026" data-institution="SPICT CON 2026" data-description="Certificate of Participation awarded in recognition of valuable support and contribution to innovation, collaboration, and digital transformation through active participation in the Sorsogon Provincial ICT Congress 2026. Held on March 11, 2026 at Sorsogon Provincial Gymnasium." data-image="Certifications/ICT CONGRESS CERTIFICATE.jpg" data-full-image="Certifications/ICT CONGRESS CERTIFICATE.jpg">
+                    <img src="Certifications/ICT CONGRESS CERTIFICATE.jpg" alt="Sorsogon Provincial ICT Congress 2026 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>ICT Congress 2026</h3>
+                        <p>SPICT CON 2026</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="JavaScript Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed JavaScript Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 26, 2026." data-image="Certifications/JavaScript Essentials 1.jpg" data-full-image="Certifications/JavaScript Essentials 1.jpg">
+                    <img src="Certifications/JavaScript Essentials 1.jpg" alt="JavaScript Essentials 1 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>JavaScript Essentials 1</h3>
+                        <p>Cisco Networking Academy</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="Introduction to Mobile Robotics with Felta Car" data-institution="DICT Region V - Bicol" data-description="Certificate of Completion for successfully completing the course 'Introduction to Mobile Robotics with Felta Car,' conducted on February 11, 2026, under the ILCDB Tech4ED-DTC of the Department of Information and Communications Technology (DICT) Region V Sorsogon Provincial Operations Office." data-image="Certifications/introduction to mobile robotics.png" data-image2="Certifications/Mobile robotics 1.jpg" data-image3="Certifications/Mobile robotics 2.jpg" data-full-image="Certifications/introduction to mobile robotics.png">
+                    <img src="Certifications/introduction to mobile robotics.png" alt="Introduction to Mobile Robotics with Felta Car Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>Introduction to Mobile Robotics with Felta Car</h3>
+                        <p>DICT Region V - Bicol</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="Introduction to Game Maker Studio" data-institution="DICT Region V - Bicol" data-description="Certificate of Completion for successfully completing the course 'Introduction to Game Maker Studio,' conducted on February 11, 2026, under the ILCDB Tech4ED-DTC of the Department of Information and Communications Technology (DICT) Region V Sorsogon Provincial Operations Office." data-image="Certifications/introduction to game maker studio.png" data-full-image="Certifications/introduction to game maker studio.png">
+                    <img src="Certifications/introduction to game maker studio.png" alt="Introduction to Game Maker Studio Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>Introduction to Game Maker Studio</h3>
+                        <p>DICT Region V - Bicol</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="Python Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed Python Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 5, 2026." data-image="Certifications/Python Essentials 1.jpg" data-full-image="Certifications/Python Essentials 1.jpg">
+                    <img src="Certifications/Python Essentials 1.jpg" alt="Python Essentials 1 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>Python Essentials 1</h3>
+                        <p>Cisco Networking Academy</p>
+                    </div>
+                </div>
+                <div class="certification-card" data-title="C++ Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed C++ Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 2, 2026." data-image="Certifications/C++ Essentials 1.jpg" data-full-image="Certifications/C++ Essentials 1.jpg">
+                    <img src="Certifications/C++ Essentials 1.jpg" alt="C++ Essentials 1 Certificate" class="award-card-img" />
+                    <div class="award-card-content">
+                        <h3>C++ Essentials 1</h3>
                         <p>Cisco Networking Academy</p>
                     </div>
                 </div>
@@ -122,46 +223,18 @@
                         <p>Computer Communication Development Institute</p>
                     </div>
                 </div>
-                <div class="certification-card" data-title="C++ Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed C++ Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 2, 2026." data-image="Certifications/C++ Essentials 1.jpg" data-full-image="Certifications/C++ Essentials 1.jpg">
-                    <img src="Certifications/C++ Essentials 1.jpg" alt="C++ Essentials 1 Certificate" class="award-card-img" />
+                <div class="certification-card" data-title="Introduction to Cybersecurity" data-institution="Cisco Networking Academy" data-description="Successfully completed the Introduction to Cybersecurity course. Proficiencies include: explaining the basics of being safe online, understanding common cyber threats and attacks, protecting oneself while online, understanding how organizations can protect their operations, and exploring career options in cybersecurity. Issued on: August 27, 2024." data-image="Certifications/Introduction to Cybersecurity.jpg" data-full-image="Certifications/Introduction to Cybersecurity.jpg">
+                    <img src="Certifications/Introduction to Cybersecurity.jpg" alt="Introduction to Cybersecurity Certificate" class="award-card-img" />
                     <div class="award-card-content">
-                        <h3>C++ Essentials 1</h3>
+                        <h3>Introduction to Cybersecurity</h3>
                         <p>Cisco Networking Academy</p>
                     </div>
                 </div>
-                <div class="certification-card" data-title="Python Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed Python Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 5, 2026." data-image="Certifications/Python Essentials 1.jpg" data-full-image="Certifications/Python Essentials 1.jpg">
-                    <img src="Certifications/Python Essentials 1.jpg" alt="Python Essentials 1 Certificate" class="award-card-img" />
+                <div class="award-card" data-title="Certificate of Achievement" data-institution="Computer Communication Development Institute" data-description="Awarded for academic excellence (Dean's Lister). General Weighted Average: 1.51. Date: February 14, 2024." data-image="Certifications/Certificate of Achievement.png" data-full-image="Certifications/Certificate of Achievement.png">
+                    <img src="Certifications/Certificate of Achievement.png" alt="Certificate of Achievement" class="award-card-img" />
                     <div class="award-card-content">
-                        <h3>Python Essentials 1</h3>
-                        <p>Cisco Networking Academy</p>
-                    </div>
-                </div>
-                <div class="certification-card" data-title="Introduction to Game Maker Studio" data-institution="DICT Region V - Bicol" data-description="Certificate of Completion for successfully completing the course 'Introduction to Game Maker Studio,' conducted on February 11, 2026, under the ILCDB Tech4ED-DTC of the Department of Information and Communications Technology (DICT) Region V Sorsogon Provincial Operations Office." data-image="Certifications/introduction to game maker studio.png" data-full-image="Certifications/introduction to game maker studio.png">
-                    <img src="Certifications/introduction to game maker studio.png" alt="Introduction to Game Maker Studio Certificate" class="award-card-img" />
-                    <div class="award-card-content">
-                        <h3>Introduction to Game Maker Studio</h3>
-                        <p>DICT Region V - Bicol</p>
-                    </div>
-                </div>
-                <div class="certification-card" data-title="Introduction to Mobile Robotics with Felta Car" data-institution="DICT Region V - Bicol" data-description="Certificate of Completion for successfully completing the course 'Introduction to Mobile Robotics with Felta Car,' conducted on February 11, 2026, under the ILCDB Tech4ED-DTC of the Department of Information and Communications Technology (DICT) Region V Sorsogon Provincial Operations Office." data-image="Certifications/introduction to mobile robotics.png" data-image2="Certifications/Mobile robotics 1.jpg" data-image3="Certifications/Mobile robotics 2.jpg" data-full-image="Certifications/introduction to mobile robotics.png">
-                    <img src="Certifications/introduction to mobile robotics.png" alt="Introduction to Mobile Robotics with Felta Car Certificate" class="award-card-img" />
-                    <div class="award-card-content">
-                        <h3>Introduction to Mobile Robotics with Felta Car</h3>
-                        <p>DICT Region V - Bicol</p>
-                    </div>
-                </div>
-                <div class="certification-card" data-title="JavaScript Essentials 1" data-institution="Cisco Networking Academy" data-description="Successfully completed JavaScript Essentials 1, offered by DICT-ITU DTC Initiative through the Cisco Networking Academy program. Issued on: February 26, 2026." data-image="Certifications/JavaScript Essentials 1.jpg" data-full-image="Certifications/JavaScript Essentials 1.jpg">
-                    <img src="Certifications/JavaScript Essentials 1.jpg" alt="JavaScript Essentials 1 Certificate" class="award-card-img" />
-                    <div class="award-card-content">
-                        <h3>JavaScript Essentials 1</h3>
-                        <p>Cisco Networking Academy</p>
-                    </div>
-                </div>
-                <div class="certification-card" data-title="Sorsogon Provincial ICT Congress 2026" data-institution="SPICT CON 2026" data-description="Certificate of Participation awarded in recognition of valuable support and contribution to innovation, collaboration, and digital transformation through active participation in the Sorsogon Provincial ICT Congress 2026. Held on March 11, 2026 at Sorsogon Provincial Gymnasium." data-image="Certifications/ICT CONGRESS CERTIFICATE.jpg" data-full-image="Certifications/ICT CONGRESS CERTIFICATE.jpg">
-                    <img src="Certifications/ICT CONGRESS CERTIFICATE.jpg" alt="Sorsogon Provincial ICT Congress 2026 Certificate" class="award-card-img" />
-                    <div class="award-card-content">
-                        <h3>ICT Congress 2026</h3>
-                        <p>SPICT CON 2026</p>
+                        <h3>Certificate of Achievement</h3>
+                        <p>Computer Communication Development Institute</p>
                     </div>
                 </div>
                 </div>
@@ -174,7 +247,7 @@
     <!-- Modal -->
     <div id="awardModal" class="modal">
         <div class="modal-shell">
-            <span class="modal-close">&times;</span>
+            <span class="modal-close" id="awardModalClose">&times;</span>
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="modal-image-container single-image">
@@ -182,6 +255,7 @@
                             <img id="modalImage" src="" alt="Certificate" class="modal-image active" />
                             <img id="modalImage2" src="" alt="Certificate" class="modal-image" style="display: none;" />
                             <img id="modalImage3" src="" alt="Certificate" class="modal-image" style="display: none;" />
+                            <video id="modalVideo" class="modal-video" controls style="display: none; max-width: 100%; height: auto;"></video>
                         </div>
                         <div class="modal-carousel-controls">
                             <button class="modal-nav-btn modal-prev-btn" aria-label="Previous image">&lt;</button>
@@ -192,6 +266,7 @@
                     <div class="modal-text">
                         <h2 id="modalTitle"></h2>
                         <p class="modal-institution" id="modalInstitution"></p>
+                        <p class="modal-date" id="modalDate" style="display:none;"></p>
                         <p class="modal-description" id="modalDescription"></p>
                         <div class="modal-buttons">
                             <button id="modalFullImageLink" type="button" class="modal-full-image-link" style="display: none;">View Certificate</button>
@@ -258,13 +333,9 @@
                     data-project-image12="Projects/Error 403.png" 
                     data-project-image13="Projects/Error 500.png" 
                     data-project-image14="Projects/Error 404.png" 
-                data-project-title="AI-Powered-Intruder-Detection-System" data-project-modal-description="Project Status: The system is currently 90% complete. Remaining tasks include SMS notification integration and comprehensive testing. I am currently working on this project, with the capstone final defense upcoming.
+                data-project-title="AI-Powered-Intruder-Detection-System" data-project-modal-description="The capstone project I chose to build is an AI-Powered Intruder Detection System, a security solution designed to monitor restricted areas in real time using an IP camera for small businesses. I chose this project because common titles like e-commerce are already overused, and I wanted to create something more unique and practical. This was not just another class assignment. It was a real system built to protect actual spaces, identify unauthorized or unknown individuals, and send alerts when security threats were detected.
 
-The capstone project. I chose to build an AI-Powered Intruder Detection System, a complete security solution that monitors restricted areas in real time using an IP camera for a small business. I chose this project because other common titles like e-commerce are too common, and I wanted to build something unique that would stand out. This wasn't just another class assignment, this was a real system that would protect real spaces, detect real threats, and send real alerts when unauthorized and unknown individuals entered restricted areas.
-
-The system uses an IP camera connected via RTSP streams to capture live video feed, then applies advanced facial recognition powered by AWS Rekognition to identify authorized personnel and detect unknown faces. Unlike different cameras that only detect motion, my system can recognize and identify specific individuals, making it more intelligent and precise. The classification logic works through three distinct scenarios: Registered + Authorized faces are allowed entry with no alarm, notification, or snapshot triggered; Registered + Unauthorized faces trigger immediate alarms, play alarm sounds, and capture snapshots for security review; and Not Registered faces are labeled as Unknown, which also triggers alarms and automatically captures snapshots for investigation. Every detection creates a comprehensive security solution that bridges computer vision, cloud AI, and full-stack web development into a single, deployable platform.
-
-I built this system using a full-stack approach: PHP 8+ for the web interface and backend logic, Python with OpenCV for real-time video processing from IP camera and the AI detection engine, MySQL for data persistence and system state management, JavaScript and Bootstrap 5.2.3 for the responsive frontend, and AWS services (Rekognition and S3) for cloud-based AI and storage.">
+Unlike traditional surveillance systems or standard CCTV setups, this project uses artificial intelligence, computer vision, and cloud-based facial recognition to identify people based on their unique facial features. The system follows a client-server architecture with a PHP 8 web application and Bootstrap 5.2.3 for the user interface, XAMPP with Apache and MySQL for local web and database services, and a Python-based detection service using OpenCV and Amazon Rekognition for face detection and recognition. AWS S3 stores captured images and detection records, MySQL manages user accounts, facial profiles, logs, and system status, while SMTP and the Semaphore API handle email and SMS notifications. Live video input is supplied through a recommended 1080p IP camera connected via RTSP.">
                     <img src="Projects/Dashboard.png" alt="AI-Powered Intruder Detection System" class="project-image" />
                     <h3>AI-Powered-Intruder-Detection-System</h3>
                     <p>My capstone Project: AI-powered facial recognition security system using AWS Rekognition, OpenCV, and PHP. Real-time detection with web-based control panel, instant alerts, and cloud backup.</p>

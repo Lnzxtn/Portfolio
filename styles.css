@@ -600,32 +600,27 @@ h3 {
   border: 5px solid #232323;
   position: absolute;
   inset: 0;
-  transition: opacity 0.28s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
 .hero-image .default-avatar {
   opacity: 1;
 }
 
+/* Hover avatar removed — keep default avatar visible and disable hover swapping */
 .hero-image .hover-avatar {
-  opacity: 0;
+  display: none;
 }
 
-.hero-image.show-lnzz .default-avatar,
-.hero-image.show-lnzz-tap .default-avatar,
-.hero-image:hover .default-avatar {
-  opacity: 0;
-}
-
-.hero-image.show-lnzz .hover-avatar,
-.hero-image.show-lnzz-tap .hover-avatar,
-.hero-image:hover .hover-avatar {
-  opacity: 1;
+/* Remove hover and focus visual swaps for hero image */
+.hero-image.show-lnzz,
+.hero-image.show-lnzz-tap,
+.hero-image:hover {
+  /* no-op: intentionally left blank to disable hover swapping */
 }
 
 .hero-image:focus-visible {
-  outline: 2px solid #8b0000;
-  outline-offset: 6px;
+  outline: none;
 }
 
 .hero-info {
@@ -1358,6 +1353,23 @@ h3 {
   display: block;
 }
 
+/* Video styling for modal (matches modal-image) */
+.modal-video {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(139, 0, 0, 0.3);
+  background: #000;
+  border: 2px solid #232323;
+  display: none;
+}
+
+.modal-video.active {
+  display: block;
+}
+
 /* Navigation buttons */
 .modal-nav-btn {
   position: static;
@@ -1466,6 +1478,141 @@ h3 {
   line-height: 1.35;
 }
 
+.modal-date {
+  color: #d0d0d0;
+  font-size: 0.95rem;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+  text-align: left;
+}
+
+.education-role {
+  color: #e6e6e6;
+  font-size: 1.1rem;
+  margin: 6px 0 6px 0;
+  font-weight: 600;
+}
+
+.modal-role {
+  color: #f0f0f0;
+  font-size: 1.05rem;
+  margin: 4px 0 8px 0;
+  font-weight: 600;
+}
+
+/* Experience View button (styled like primary action) */
+.experience-view-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #8b0000;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(139,0,0,0.18);
+  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+}
+
+.experience-view-btn:hover {
+  background: #a10000;
+  transform: translateY(-2px);
+}
+
+/* Specific styling for the info modal to match award modal */
+#infoModal .modal-shell {
+  width: min(92vw, 960px);
+}
+
+#infoModal .modal-content {
+  background: linear-gradient(135deg, #1a1a1a 0%, #232323 100%);
+  border: 2px solid #8b0000;
+  border-radius: 18px;
+  padding: 18px 22px;
+}
+
+#infoModal .modal-body {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px 6px;
+}
+
+#infoModal .modal-text h2 {
+  font-size: 1.9rem;
+  margin-bottom: 6px;
+}
+
+#infoModal .modal-description {
+  color: #dcdcdc;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-top: 12px;
+}
+
+/* Close button placement for info modal */
+#infoModal .modal-close {
+  top: -38px;
+  right: 8px;
+}
+
+.info-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-modal-carousel {
+  width: 100%;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.info-carousel-image-wrapper {
+  display: block;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #111;
+  border: 2px solid #333;
+}
+
+.info-carousel-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 380px);
+  object-fit: contain;
+  border-radius: 10px;
+  cursor: zoom-in;
+  transition: box-shadow 0.2s ease;
+}
+
+.info-carousel-image:hover {
+  box-shadow: 0 6px 24px rgba(139, 0, 0, 0.35);
+}
+
+.info-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.info-carousel-counter {
+  color: #d0d0d0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-width: 72px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .info-carousel-image {
+    max-height: min(45vh, 280px);
+  }
+}
+
 .modal-description {
   color: #dcdcdc;
   font-size: 1.05rem;
@@ -1563,7 +1710,9 @@ h3 {
   overflow: visible;
 }
 
-body.certificate-viewer-open .modal-close {
+body.certificate-viewer-open #awardModal .modal-close,
+body.certificate-viewer-open #infoModal .modal-close,
+body.certificate-viewer-open #projectModal .modal-close {
   opacity: 0;
   pointer-events: none;
 }
@@ -1939,7 +2088,6 @@ body.certificate-viewer-open .modal-close {
   .hero-image {
     --hero-avatar-size: 240px;
     flex: 0 0 auto;
-    cursor: pointer;
     touch-action: manipulation;
   }
   /* Show profile photo above text on tablet/mobile */

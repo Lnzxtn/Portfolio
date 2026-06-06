@@ -42,6 +42,90 @@ function unlockScroll() {
 }
 // ===== END GLOBAL SCROLL LOCK SYSTEM =====
 
+const DICT_EXPERIENCE_PHOTOS = [
+    'Experience/DICT/intern.jpg',
+    'Experience/DICT/618713347_4390997134468858_4807792664004980564_n.jpg',
+    'Experience/DICT/619215058_1607555320440871_3829334001618285594_n.jpg',
+    'Experience/DICT/620564670_1300436398804896_3010719711821546619_n.jpg',
+    'Experience/DICT/624074644_927595789940252_2640203704218984250_n.jpg',
+    'Experience/DICT/625919053_916044737542704_8386134638496021252_n.jpg',
+    'Experience/DICT/626553512_25359744347057757_6036241437941726833_n.jpg',
+    'Experience/DICT/627854745_966513112371069_4013262926747304352_n.jpg',
+    'Experience/DICT/628100061_1412757487260648_7339848529137789792_n.jpg',
+    'Experience/DICT/629306170_3098931827163272_4751620058613035193_n.jpg',
+    'Experience/DICT/630042266_903460022172670_1135996259067695136_n.jpg',
+    'Experience/DICT/633337264_1343913194162702_8499114635445728424_n.jpg',
+    'Experience/DICT/634964689_1577173056876038_7812565862094317183_n.jpg',
+    'Experience/DICT/636752159_937048142332324_167799614209496595_n.jpg',
+    'Experience/DICT/643185088_1707988500567039_6672606230095407340_n.jpg',
+    'Experience/DICT/643616009_1292019642777280_7035785874433001624_n.jpg',
+    'Experience/DICT/644241143_959949556456130_7502557981449545847_n.jpg',
+    'Experience/DICT/644248163_2248611108881148_9125655677689245418_n.jpg',
+    'Experience/DICT/644914289_1240028897732068_4331307368958903457_n.jpg',
+    'Experience/DICT/645010427_1648624932838985_2063671902023246633_n.jpg',
+    'Experience/DICT/645499053_895267469809230_7356135886695984713_n.jpg',
+    'Experience/DICT/645637638_2908754895978552_6974878328606035628_n.jpg',
+    'Experience/DICT/645791131_960308826519686_7543209431806733951_n.jpg',
+    'Experience/DICT/645815108_938081615342625_4562210037509953234_n.jpg',
+    'Experience/DICT/645821552_1252191253535984_7199786152372718889_n.jpg',
+    'Experience/DICT/646056409_3161193370720166_1436990541464003248_n.jpg',
+    'Experience/DICT/646093754_2102651727242414_7057034209521508967_n.jpg',
+    'Experience/DICT/646147895_731206483291182_882469505216492823_n.jpg',
+    'Experience/DICT/646196121_2179057126255322_7385708017234817183_n.jpg',
+    'Experience/DICT/646351954_1251833763058514_4072984735672603138_n.jpg',
+    'Experience/DICT/646684895_1815393903198889_8605675522223256974_n.jpg',
+    'Experience/DICT/646834154_1833224194043980_2366838038992582426_n.jpg',
+    'Experience/DICT/646863431_849220394806781_1418383346802133345_n.jpg',
+    'Experience/DICT/646881777_1317134450250961_7061602763062569242_n.jpg',
+    'Experience/DICT/647066578_1349177770398936_3489727959628087160_n.jpg',
+    'Experience/DICT/647337143_1488668762851093_196819405615403062_n.jpg',
+    'Experience/DICT/648302044_1715125646136215_6053006256793947538_n.jpg',
+    'Experience/DICT/648327761_1264259389130046_1211041765169351004_n.jpg',
+    'Experience/DICT/648506452_1284800910225293_4384216625294861605_n.jpg',
+    'Experience/DICT/648580868_858906340507402_4031026871099612539_n.jpg',
+    'Experience/DICT/648790661_1632995224513798_2148630223239502642_n.jpg',
+    'Experience/DICT/649492160_1598773918001632_8796760792209149579_n.jpg',
+    'Experience/DICT/649518856_4220654021480432_584001412532540770_n.jpg',
+    'Experience/DICT/649688398_1446899213690088_8236918021667251239_n.jpg',
+    'Experience/DICT/650009279_1533890212077702_3986697613200913735_n.jpg',
+    'Experience/DICT/650275780_1711918466641473_517733775539191283_n.jpg',
+    'Experience/DICT/650925674_1451483330322946_8405002643453319418_n.jpg',
+    'Experience/DICT/652741297_4434516180115562_4024600786716651854_n.jpg',
+    'Experience/DICT/653754225_1295663835754364_7821410577780296102_n.jpg',
+    'Experience/DICT/655075292_1319825159974280_3293575440739452285_n.jpg',
+    'Experience/DICT/655109264_902879702538475_2746737641989997233_n.jpg',
+    'Experience/DICT/655169600_1366355882196243_3952268845489389360_n.jpg',
+    'Experience/DICT/655449330_1524194375944253_7015708707717030966_n.jpg',
+    'Experience/DICT/655469395_2150058632419056_3608740700219420954_n.jpg',
+    'Experience/DICT/655565489_900337149674744_994517392851019454_n.jpg',
+    'Experience/DICT/656013022_792668197254546_8507839233074208368_n.jpg',
+    'Experience/DICT/656655570_1500691974959889_7114763825630511891_n.jpg',
+    'Experience/DICT/657109846_1644227403571260_194536296477874953_n.jpg',
+    'Experience/DICT/657330886_1245589437623060_7521920719763909289_n.jpg',
+    'Experience/DICT/657366373_2429327160839702_4847380990418948639_n.jpg',
+    'Experience/DICT/661008367_2113831399409983_6152079947137050311_n.jpg',
+    'Experience/DICT/662483181_2948688935321099_5917244869498508984_n.jpg',
+    'Experience/DICT/664921094_1945588759378579_997295521283288549_n.jpg',
+    'Experience/DICT/665100066_1765091321136696_8264409950385598381_n.jpg',
+    'Experience/DICT/668707425_1951088725492319_4767451570189104006_n.jpg',
+    'Experience/DICT/670015955_739477235917480_719113322169067973_n.jpg',
+    'Experience/DICT/675262141_1244196824571962_8555932607574394797_n.jpg',
+    'Experience/DICT/676440990_1123946396587887_5237500859800185861_n.jpg',
+    'Experience/DICT/676901605_1650677895976008_2744552864604249585_n.jpg',
+    'Experience/DICT/677825253_996409776164694_5479859614364925040_n.jpg',
+    'Experience/DICT/679962056_1346486950643138_5571698520669865890_n.jpg',
+    'Experience/DICT/680243904_1313741994012620_2518534659736704144_n.jpg',
+    'Experience/DICT/680430489_1331434262176154_8654587294640713430_n.jpg',
+    'Experience/DICT/684461757_1711330860217178_4377956049909973416_n.jpg',
+    'Experience/DICT/684647109_1835505837117396_4794721316960084583_n.jpg',
+    'Experience/DICT/685775534_943184375363739_5907697589447000658_n.jpg',
+    'Experience/DICT/IMG_20260313_064739.jpg'
+];
+
+const EXPERIENCE_PHOTO_SETS = {
+    dict: DICT_EXPERIENCE_PHOTOS
+};
+
 // ===== PROJECT MODAL FUNCTIONALITY =====
 (function() {
     const projectModal = document.getElementById('projectModal');
@@ -151,10 +235,12 @@ function unlockScroll() {
         // Check if other modals are open before unlocking
         const awardModal = document.getElementById('awardModal');
         const certificateViewerModal = document.getElementById('certificateViewerModal');
+        const infoModal = document.getElementById('infoModal');
         const isAwardModalOpen = awardModal && awardModal.classList.contains('open');
         const isCertificateViewerOpen = certificateViewerModal && certificateViewerModal.classList.contains('open');
+        const isInfoModalOpen = infoModal && infoModal.classList.contains('open');
         
-        if (!isAwardModalOpen && !isCertificateViewerOpen) {
+        if (!isAwardModalOpen && !isCertificateViewerOpen && !isInfoModalOpen) {
             unlockScroll();
         }
     }
@@ -281,7 +367,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let heroImageTapTimeoutId;
     if (heroName) {
         const introText = "Hi, I'm ";
-        const names = ['Lance Christian Carillo', 'Lanz Xtian', 'Lance Christian Carillo'];
+        const names = ['Lance Christian Carillo'];
         let nameIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -297,17 +383,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function syncHeroAvatar(activeName) {
             if (!heroImage) return;
-            heroImage.classList.toggle('show-lnzz', activeName === 'Lanz Xtian');
+            // Removed lnzz avatar switch: ensure special class is not present
+            heroImage.classList.remove('show-lnzz');
         }
 
         function triggerTemporaryHeroAvatarReveal() {
-            if (!heroImage || !isTapRevealDevice()) return;
-
-            heroImage.classList.add('show-lnzz-tap');
-            clearTimeout(heroImageTapTimeoutId);
-            heroImageTapTimeoutId = setTimeout(() => {
-                heroImage.classList.remove('show-lnzz-tap');
-            }, 5000);
+            // no-op: lnzz avatar removed, keep typing animation only
         }
 
         function animateHeroName() {
@@ -349,14 +430,7 @@ window.addEventListener('DOMContentLoaded', () => {
         heroName.textContent = introText;
         syncHeroAvatar(names[nameIndex]);
 
-        if (heroImage) {
-            heroImage.addEventListener('click', triggerTemporaryHeroAvatarReveal);
-            heroImage.addEventListener('keydown', (event) => {
-                if (event.key !== 'Enter' && event.key !== ' ') return;
-                event.preventDefault();
-                triggerTemporaryHeroAvatarReveal();
-            });
-        }
+        // Avatar reveal listeners removed (lnzz image removed)
 
         setTimeout(animateHeroName, 300);
     }
@@ -458,14 +532,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalTitle = document.getElementById('modalTitle');
     const modalInstitution = document.getElementById('modalInstitution');
     const modalDescription = document.getElementById('modalDescription');
+    const modalDate = document.getElementById('modalDate');
     const modalImage = document.getElementById('modalImage');
     const modalImage2 = document.getElementById('modalImage2');
     const modalImage3 = document.getElementById('modalImage3');
+    const modalVideo = document.getElementById('modalVideo');
     const modalFullImageLink = document.getElementById('modalFullImageLink');
     const certificateViewerModal = document.getElementById('certificateViewerModal');
     const certificateViewerImage = document.getElementById('certificateViewerImage');
     const certificateViewerClose = document.getElementById('certificateViewerClose');
-    const closeBtn = document.querySelector('.modal-close');
+    const closeBtn = modal ? modal.querySelector('.modal-close') : null;
     const awardCards = document.querySelectorAll('.award-card, .certification-card');
     const prevBtn = document.querySelector('.modal-prev-btn');
     const nextBtn = document.querySelector('.modal-next-btn');
@@ -497,9 +573,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('certificate-viewer-open');
 
         const projectModal = document.getElementById('projectModal');
+        const infoModal = document.getElementById('infoModal');
         const isAwardModalOpen = modal && modal.classList.contains('open');
         const isProjectModalOpen = projectModal && projectModal.classList.contains('open');
-        if (!isAwardModalOpen && !isProjectModalOpen) {
+        const isInfoModalOpen = infoModal && infoModal.classList.contains('open');
+        if (!isAwardModalOpen && !isProjectModalOpen && !isInfoModalOpen) {
             unlockScroll();
         }
     }
@@ -510,12 +588,20 @@ document.addEventListener('DOMContentLoaded', function() {
         images.forEach(img => {
             img.classList.remove('active');
             img.style.display = 'none';
+            // pause videos when hidden
+            if (img.tagName === 'VIDEO') {
+                try { img.pause(); } catch (e) {}
+            }
         });
 
         // Show current image
         if (images[index]) {
             images[index].classList.add('active');
             images[index].style.display = 'block';
+            // if it's a video, reset to start
+            if (images[index].tagName === 'VIDEO') {
+                try { images[index].currentTime = 0; } catch (e) {}
+            }
         }
 
         // Update indicators
@@ -565,12 +651,33 @@ document.addEventListener('DOMContentLoaded', function() {
             const image = this.getAttribute('data-image');
             const image2 = this.getAttribute('data-image2');
             const image3 = this.getAttribute('data-image3');
+            const video = this.getAttribute('data-video');
             const fullImageLink = this.getAttribute('data-full-image');
 
             modalTitle.textContent = title;
             modalInstitution.textContent = institution;
             // Display description as plain text with proper formatting
             modalDescription.textContent = description;
+
+            // Determine and display date: prefer explicit data-date, otherwise parse from description text
+            const explicitDate = this.getAttribute('data-date');
+            let dateText = '';
+            if (explicitDate) {
+                dateText = explicitDate;
+            } else if (description) {
+                const issuedMatch = description.match(/Issued on:\s*(.+?)(\.|$)/i);
+                const dateMatch = description.match(/Date:\s*(.+?)(\.|$)/i);
+                if (issuedMatch) dateText = issuedMatch[1].trim();
+                else if (dateMatch) dateText = dateMatch[1].trim();
+            }
+
+            if (dateText) {
+                modalDate.textContent = dateText;
+                modalDate.style.display = 'block';
+            } else {
+                modalDate.textContent = '';
+                modalDate.style.display = 'none';
+            }
             
             // Set up images
             modalImage.src = image;
@@ -594,6 +701,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 imageContainer.classList.remove('single-image');
             } else {
                 modalImage3.style.display = 'none';
+            }
+            // Handle video if exists — prefer MP4 source then fallback to provided file (MOV etc.)
+            if (video && modalVideo) {
+                // build possible mp4 path by replacing extension
+                let mp4Path = video.replace(/\.(mov|quicktime|qt)$/i, '.mp4');
+                // Create source elements — browser will pick a playable one
+                modalVideo.innerHTML = '';
+                const sourceMp4 = document.createElement('source');
+                sourceMp4.src = mp4Path;
+                sourceMp4.type = 'video/mp4';
+                const sourceFallback = document.createElement('source');
+                sourceFallback.src = video;
+                // set type based on extension
+                if (/\.mov$/i.test(video)) sourceFallback.type = 'video/quicktime';
+                else sourceFallback.type = 'video/mp4';
+                modalVideo.appendChild(sourceMp4);
+                modalVideo.appendChild(sourceFallback);
+                modalVideo.removeAttribute('poster');
+                // Use second image as poster if available to show a thumbnail
+                try {
+                    modalVideo.poster = image2 || image || '';
+                } catch (e) {}
+                modalVideo.pause();
+                modalVideo.style.display = 'none';
+                try { modalVideo.load(); } catch (e) {}
+                images.push(modalVideo);
+                imageContainer.classList.remove('single-image');
+            } else if (modalVideo) {
+                modalVideo.style.display = 'none';
+                try { modalVideo.pause(); modalVideo.innerHTML = ''; } catch (e) {}
             }
             if (images.length === 1) {
                 imageContainer.classList.add('single-image');
@@ -683,21 +820,183 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if other modals are open before unlocking
         const projectModal = document.getElementById('projectModal');
         const certificateViewerModal = document.getElementById('certificateViewerModal');
+        const infoModal = document.getElementById('infoModal');
         const isProjectModalOpen = projectModal && projectModal.classList.contains('open');
         const isCertificateViewerOpen = certificateViewerModal && certificateViewerModal.classList.contains('open');
-        if (!isProjectModalOpen && !isCertificateViewerOpen) {
+        const isInfoModalOpen = infoModal && infoModal.classList.contains('open');
+        if (!isProjectModalOpen && !isCertificateViewerOpen && !isInfoModalOpen) {
             unlockScroll();
         }
     }
 
     // Close modal when close button is clicked
-    closeBtn.addEventListener('click', closeModal);
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            closeModal();
+        });
+    }
 
     // Close modal when clicking outside the modal content
     modal.addEventListener('click', function(event) {
         // Only close if clicking directly on the modal background, not on content or buttons
         if (event.target === modal) {
             closeModal();
+        }
+    });
+
+    // Experience info modal handlers
+    const infoModal = document.getElementById('infoModal');
+    const infoModalClose = document.getElementById('infoModalClose');
+    const infoModalTitle = document.getElementById('infoModalTitle');
+    const infoModalDate = document.getElementById('infoModalDate');
+    const infoModalDescription = document.getElementById('infoModalDescription');
+    const infoModalCarousel = document.getElementById('infoModalCarousel');
+    const infoModalImage = document.getElementById('infoModalImage');
+    const infoCarouselPrev = document.getElementById('infoCarouselPrev');
+    const infoCarouselNext = document.getElementById('infoCarouselNext');
+    const infoCarouselCounter = document.getElementById('infoCarouselCounter');
+
+    let infoCarouselPhotos = [];
+    let infoCarouselIndex = 0;
+
+    function updateInfoCarouselImage() {
+        if (!infoModalImage || !infoCarouselPhotos.length) return;
+        if (infoCarouselIndex < 0) infoCarouselIndex = 0;
+        if (infoCarouselIndex > infoCarouselPhotos.length - 1) {
+            infoCarouselIndex = infoCarouselPhotos.length - 1;
+        }
+
+        const currentPhoto = infoCarouselPhotos[infoCarouselIndex];
+        infoModalImage.src = currentPhoto;
+        infoModalImage.alt = 'DICT internship photo ' + (infoCarouselIndex + 1);
+
+        if (infoCarouselCounter) {
+            infoCarouselCounter.textContent = (infoCarouselIndex + 1) + ' / ' + infoCarouselPhotos.length;
+        }
+
+        if (infoCarouselPrev) infoCarouselPrev.disabled = infoCarouselIndex === 0;
+        if (infoCarouselNext) infoCarouselNext.disabled = infoCarouselIndex === infoCarouselPhotos.length - 1;
+    }
+
+    function setupInfoCarousel(photoSetKey) {
+        const photoSet = EXPERIENCE_PHOTO_SETS[photoSetKey] || [];
+        infoCarouselPhotos = photoSet.filter(function(path, index, list) {
+            return list.indexOf(path) === index;
+        });
+        infoCarouselIndex = 0;
+
+        if (!infoModalCarousel) return;
+
+        if (infoCarouselPhotos.length) {
+            infoModalCarousel.hidden = false;
+            updateInfoCarouselImage();
+        } else {
+            infoModalCarousel.hidden = true;
+            if (infoModalImage) infoModalImage.removeAttribute('src');
+        }
+    }
+
+    function closeInfoModal() {
+        if (!infoModal) return;
+        infoModal.classList.remove('open');
+        infoModal.setAttribute('inert', '');
+        infoCarouselPhotos = [];
+        infoCarouselIndex = 0;
+        if (infoModalCarousel) infoModalCarousel.hidden = true;
+        if (infoModalImage) infoModalImage.removeAttribute('src');
+
+        const awardModalEl = document.getElementById('awardModal');
+        const projectModalEl = document.getElementById('projectModal');
+        const isAwardModalOpen = awardModalEl && awardModalEl.classList.contains('open');
+        const isProjectModalOpen = projectModalEl && projectModalEl.classList.contains('open');
+        const isCertificateViewerOpenNow = isCertificateViewerOpen();
+        if (!isAwardModalOpen && !isProjectModalOpen && !isCertificateViewerOpenNow) {
+            unlockScroll();
+        }
+    }
+
+    document.querySelectorAll('.experience-view-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const parent = this.closest('.education-item');
+            if (!parent) return;
+            const titleEl = parent.querySelector('.education-content h3');
+            const titleText = titleEl ? titleEl.textContent : 'Experience';
+            const roleEl = parent.querySelector('.education-content .education-role');
+            const roleText = roleEl ? roleEl.textContent : '';
+            const desc = parent.getAttribute('data-description') || '';
+            const date = parent.getAttribute('data-date') || parent.querySelector('.education-date')?.textContent || '';
+            const photoSetKey = parent.getAttribute('data-photos') || '';
+
+            infoModalTitle.textContent = titleText;
+            const infoModalRole = document.getElementById('infoModalRole');
+            if (infoModalRole) infoModalRole.textContent = roleText;
+            infoModalDate.textContent = date;
+            infoModalDescription.textContent = desc;
+
+            setupInfoCarousel(photoSetKey);
+
+            infoModal.classList.add('open');
+            infoModal.removeAttribute('inert');
+            lockScroll();
+        });
+    });
+
+    if (infoCarouselPrev) {
+        infoCarouselPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (infoCarouselPhotos.length <= 1) return;
+            infoCarouselIndex = Math.max(0, infoCarouselIndex - 1);
+            updateInfoCarouselImage();
+        });
+    }
+
+    if (infoCarouselNext) {
+        infoCarouselNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (infoCarouselPhotos.length <= 1) return;
+            infoCarouselIndex = Math.min(infoCarouselPhotos.length - 1, infoCarouselIndex + 1);
+            updateInfoCarouselImage();
+        });
+    }
+
+    if (infoModalImage) {
+        infoModalImage.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const currentPhoto = infoCarouselPhotos[infoCarouselIndex];
+            if (!currentPhoto) return;
+            openCertificateViewer(currentPhoto, 'DICT internship photo');
+        });
+    }
+
+    if (infoModalClose) {
+        infoModalClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeInfoModal();
+        });
+    }
+
+    if (infoModal) {
+        infoModal.addEventListener('click', function(event) {
+            if (event.target === infoModal) {
+                closeInfoModal();
+            }
+        });
+        infoModal.setAttribute('inert', '');
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (!infoModal || !infoModal.classList.contains('open') || isCertificateViewerOpen()) return;
+
+        if (event.key === 'Escape') {
+            closeInfoModal();
+        } else if (event.key === 'ArrowRight' && infoCarouselPhotos.length > 1) {
+            infoCarouselIndex = Math.min(infoCarouselPhotos.length - 1, infoCarouselIndex + 1);
+            updateInfoCarouselImage();
+        } else if (event.key === 'ArrowLeft' && infoCarouselPhotos.length > 1) {
+            infoCarouselIndex = Math.max(0, infoCarouselIndex - 1);
+            updateInfoCarouselImage();
         }
     });
 
