@@ -327,6 +327,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Force-download handler for resume link (fetch + blob fallback)
+document.addEventListener('DOMContentLoaded', function () {
+    const dl = document.getElementById('downloadResume');
+    if (!dl) return;
+
+    dl.addEventListener('click', async function (e) {
+        e.preventDefault();
+        const url = this.href;
+        const filename = this.getAttribute('download') || (url.split('/').pop() || 'resume.pdf');
+        try {
+            const resp = await fetch(url, { cache: 'no-cache' });
+            if (!resp.ok) throw new Error('Network response was not ok');
+            const blob = await resp.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (err) {
+            // Fallback: open in new tab (browser may still show PDF viewer)
+            const win = window.open(url, '_blank');
+            if (!win) window.location.href = url;
+        }
+    });
+});
+
 // Add scroll event listener for navbar
 window.addEventListener('scroll', function() {
     // Site uses `.navbar` (no #desktop-nav). Guard to prevent console errors.
