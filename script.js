@@ -337,8 +337,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const url = this.href;
         const filename = this.getAttribute('download') || (url.split('/').pop() || 'resume.pdf');
         try {
-            const resp = await fetch(url, { cache: 'no-cache' });
-            if (!resp.ok) throw new Error('Network response was not ok');
+            let resp = await fetch(url, { cache: 'no-cache' });
+            if (!resp.ok) {
+                // If the site pages path returns 404 (GitHub Pages), try raw.githubusercontent fallback
+                if (resp.status === 404) {
+                    try {
+                        const repoUser = 'Lnzxtn';
+                        const repoName = 'Portfolio';
+                        const branch = 'Main';
+                        const path = url.replace(/^\/+/, '');
+                        const rawUrl = `https://raw.githubusercontent.com/${repoUser}/${repoName}/${branch}/${path}`;
+                        resp = await fetch(rawUrl, { cache: 'no-cache' });
+                    } catch (e) {
+                        throw new Error('Network response was not ok');
+                    }
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            }
             const blob = await resp.blob();
             const blobUrl = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
